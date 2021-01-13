@@ -16,6 +16,8 @@
             <strong class="mx-auto">{{ Session::get('success') }}</strong><button class="ml-auto">X</button>
         </div>
     @endif
+    {{-- Show featured products only if it's home page --}}
+    @if(strpos(url()->full(), 'page') == false)
     <div class="featured-products pb-20 px-10 sm:px-0" id="#featured">
         <h2 style="font-family: Overpass" class="uppercase tracking-widest text-xl italic text-center font-bold pb-8">
             Featured Products
@@ -54,6 +56,7 @@
             @endforeach
         </div>
     </div>
+    @endif
 </div>
 <div class="container mx-auto my-20">
     <div class="new-products px-10 sm:px-0" id="new">
