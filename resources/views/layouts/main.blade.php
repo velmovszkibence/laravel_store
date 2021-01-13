@@ -20,7 +20,7 @@
     @yield('content')
     @include('includes.footer')
     <script src="{{ mix('js/app.js') }}"></script>
-    <script src="{{ mix('js/custom.js') }}"></script>
+    <script src="{{ '/js/custom.js' }}"></script>
     @yield('scripts')
 </body>
 </html>
