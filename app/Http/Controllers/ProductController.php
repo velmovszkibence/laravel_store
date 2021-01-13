@@ -23,6 +23,7 @@ class ProductController extends Controller
     {
         $parents = Category::whereNull('parent_id')->get();
         $subcategories = Category::whereNotNull('parent_id')->orderBy('name', 'asc')->get();
+        $featured = ProductResource::collection(Product::inRandomOrder()->where('discount', '>', '0')->limit(5)->get());
 
         if($request->q) {
             $products = ProductResource::collection(Product::query()
@@ -32,7 +33,7 @@ class ProductController extends Controller
         } else {
             $products = ProductResource::collection(Product::where('is_active', 1)->orderBy('name', 'desc')->paginate(20));
         }
-        return view('index', ['products' => $products, 'parents' => $parents, 'subcategories' => $subcategories]);
+        return view('index', ['products' => $products, 'parents' => $parents, 'subcategories' => $subcategories, 'featured' => $featured]);
     }
 
     public function show($id)

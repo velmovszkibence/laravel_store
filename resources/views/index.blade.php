@@ -22,9 +22,7 @@
         </h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
-            @foreach($products as $product)
-
-                @if($product->discount != 0 && $product->discount != NULL)
+            @foreach($featured as $product)
                     <div class="product product-for-sale relative my-10 h-64">
                         <span class="off absolute transform rotate-45 text-white text-md text-semibold">{{ $product->discount }}%<i class="text-xs"> OFF</i></span>
                         <a href="{{ route('product.show', $product['id']) }}">
@@ -53,31 +51,6 @@
                             @endif
                         </div>
                     </div>
-                @else
-                <div class="product relative my-10 h-64">
-                    <a href="{{ route('product.show', $product['id']) }}">
-                        <img src="/images/{{ $product['image'] }}" alt="productimg" class="h-56 mx-auto product-img" />
-                        <h2 class="mt-4 text-sm">{{ $product['name'] }}</h2>
-                        <h2 class="pt-2 text-lg">${{ $product['price'] }}</h2>
-                    </a>
-
-                    <div class="add-to-cart w-full">
-                        @if($product->inStock())
-                            <button class="add-to-cart-btn text-white font-semibold rounded-lg flex mx-auto">
-                                <svg class="w-8 p-2 bg-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <a href="{{ route('product.addtocart', ['id' => $product['id']]) }}"><span class="py-2 px-1 font-bold text-xs">ADD TO CART</span></a>
-                            </button>
-                        @endif
-                        @if($product->outOfStock())
-                            <button class="add-to-cart-btn font-semibold rounded-lg flex mx-auto cursor-default">
-                                <span class="py-2 px-1 font-bold text-xs bg-gray-300 text-black">Out of stock</span>
-                            </button>
-                        @endif
-                    </div>
-                </div>
-                @endif
             @endforeach
         </div>
     </div>

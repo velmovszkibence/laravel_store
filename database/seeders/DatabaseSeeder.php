@@ -16,12 +16,5 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory()->count(20)->create();
         \App\Models\Product::factory()->count(50)->create();
-
-        $user = new \App\Models\User();
-        $user->email = 'admin@admin.com';
-        $user->name = 'John Doe';
-        $user->is_admin = 1;
-        $user->password = Hash::make('password');
-        $user->save();
     }
 }

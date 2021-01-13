@@ -50,6 +50,11 @@ class UserController extends Controller
 
     public function postSignin(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
         if (Auth::attempt([
             'email' => $request->input('email'),
             'password' => $request->input('password')])) {
