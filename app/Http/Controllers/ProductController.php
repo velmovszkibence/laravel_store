@@ -23,7 +23,7 @@ class ProductController extends Controller
     {
         $parents = Category::whereNull('parent_id')->get();
         $subcategories = Category::whereNotNull('parent_id')->orderBy('name', 'asc')->get();
-        $featured = ProductResource::collection(Product::inRandomOrder()->where('discount', '>', '0')->limit(5)->get());
+        $featured = ProductResource::collection(Product::inRandomOrder()->where('discount', '>', '0')->limit(6)->get());
 
         if($request->q) {
             $products = ProductResource::collection(Product::query()

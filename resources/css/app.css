@@ -100,7 +100,6 @@ textarea {
 
 .toggle-input:checked + label {
     color: white;
-    background: #f38022;
 }
 
 .toggle-input:checked ~ label:after {

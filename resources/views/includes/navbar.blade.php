@@ -1,26 +1,26 @@
 <div id="navbar" class="hidden w-full lg:block">
     <nav class="bg-orange text-white text-sm 2xl:text-xl">
         <div class="container mx-auto flex flex-col justify-between px-4 py-6 lg:flex-row">
-            <ul class="flex flex-col mx-auto items-center font-semibold text-center w-1/2 text-sm lg:text-base lg:w-full lg:flex-row">
-                <li class="hidden lg:block">
+            <ul class="flex flex-col mx-auto items-center font-semibold text-center w-1/2 text-sm lg:w-full lg:grid lg:grid-cols-3 xl:text-base xl:flex xl:flex-row">
+                <li class="hidden lg:block xl:mr-auto">
                     <a href="{{ route('product.index') }}" class="nav-item">
                         E-Commerce Store
                     </a>
                 </li>
                 @if(Auth::check() && Auth::user()->is_admin)
-                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white lg:ml-16 mt-3 lg:mt-0">
+                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 xl:mx-auto">
                     <a href="{{ route('admin.dashboard') }}" class="nav-item lg:px-3">Dashboard</a>
                 </li>
                 @endif
-                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white lg:ml-6 mt-3 lg:mt-0">
+                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 xl:mx-auto">
                     <a href="#" class="nav-item lg:px-3">New Products</a>
                 </li>
-                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white lg:ml-6 mt-3 lg:mt-0">
+                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 xl:mx-auto">
                     <a href="#" class="nav-item lg:px-3">Contact</a>
                 </li>
 
                 @if(Request::is('/'))
-                <li class="toggleable hoverable hover:text-white">
+                <li class="toggleable hoverable hover:text-white xl:mx-auto">
                     <input type="checkbox" value="selected" id="toggle-one" class="toggle-input">
                     <label for="toggle-one" class="block cursor-pointer py-6 px-4 lg:p-6">Categories</label>
 
@@ -48,23 +48,23 @@
                 @endif
 
                 @if (Auth::check())
-                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white lg:ml-6 mt-3 lg:mt-0">
+                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 xl:mx-auto">
                     <a href="{{ route('user.profile') }}" class="nav-item lg:px-3">
                         Profile
                     </a>
                 </li>
-                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white lg:ml-6 mt-3 lg:mt-0">
+                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 xl:mx-auto">
                     <a href="{{ route('user.logout') }}" class="nav-item lg:px-3">
                         Logout
                     </a>
                 </li>
                 @endif
-                <li class="search-form mt-10 pr-8 mx-auto sm:pr-0 lg:mt-0">
+                <li class="search-form mt-10 pr-8 mx-auto sm:pr-0 lg:col-span-3 xl:mt-0">
                     <?php $link = ['route' => 'product.index'] ?>
                     @include('includes.searchform', $link)
                 </li>
             </ul>
-            <ul class="flex flex-col items-center py-4 mt-10 lg:mt-0 lg:flex-row">
+            <ul class="flex flex-col items-center py-4 mt-10 lg:mt-0 xl:ml-10">
                 <li class="border-white border-2 rounded-full lg:ml-auto">
                     <a href="{{ route('product.shoppingcart') }}" class="flex px-6 py-1">
                     <svg class="w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
