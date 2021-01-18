@@ -3,8 +3,12 @@ const tabs = document.querySelectorAll('.tabs')
 const tab = document.querySelectorAll('.tab')
 const panel = document.querySelectorAll('.tab-content')
 const pagination = document.getElementsByClassName('tailwind-pagination')[0]
-const product_img_input = document.getElementById('product-image')
-const product_image_src = document.getElementById('product-image-src')
+const product_img_input_f = document.getElementById('product-image-f')
+const product_img_input_s = document.getElementById('product-image-s')
+const product_img_input_t = document.getElementById('product-image-t')
+const product_image_src_f = document.getElementById('product-image-src-f')
+const product_image_src_s = document.getElementById('product-image-src-s')
+const product_image_src_t = document.getElementById('product-image-src-t')
 const menu_btn = document.getElementById('menu-btn')
 const order_options = document.querySelectorAll('.order-options')
 const flash_msg = document.querySelectorAll('.flash-msg')
@@ -39,19 +43,46 @@ for (let i = 0; i < tab.length; i++) {
 }
 
 // Image preview
-if(product_img_input != null) {
-    product_img_input.addEventListener('change', function() {
+if(product_img_input_f != null) {
+    product_img_input_f.addEventListener('change', function() {
+        readURL(this)
+    })
+}
+
+if(product_img_input_s != null) {
+    product_img_input_s.addEventListener('change', function() {
+        readURL(this)
+    })
+}
+
+if(product_img_input_t != null) {
+    product_img_input_t.addEventListener('change', function() {
         readURL(this)
     })
 }
 
 function readURL(input) {
+
     if (input.files && input.files[0]) {
         var reader = new FileReader()
-        reader.onload = function (e) {
-            product_image_src.setAttribute('src', e.target.result)
+        if(input == product_img_input_f ) {
+            reader.onload = function (e) {
+                product_image_src_f.setAttribute('src', e.target.result)
+            }
+            reader.readAsDataURL(input.files[0])
         }
-        reader.readAsDataURL(input.files[0])
+        else if(input == product_img_input_s){
+            reader.onload = function (e) {
+                product_image_src_s.setAttribute('src', e.target.result)
+            }
+            reader.readAsDataURL(input.files[0])
+        } else if(input == product_img_input_t) {
+            reader.onload = function (e) {
+                product_image_src_t.setAttribute('src', e.target.result)
+            }
+            reader.readAsDataURL(input.files[0])
+        }
+
     }
 }
 

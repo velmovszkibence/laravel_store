@@ -19,10 +19,10 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->integer('stock');
             $table->text('description');
-            $table->string('image');
             $table->integer('is_active')->default(0);
             $table->integer('discount')->default(0);
             $table->integer('sold')->default(0);
+            $table->integer('category_id')->nullable();
             $table->timestamps();
         });
     }

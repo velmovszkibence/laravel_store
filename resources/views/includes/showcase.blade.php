@@ -1,4 +1,4 @@
-<div class="showcase bg-orange text-white">
+<div class="showcase bg-orange text-white pt-10">
     <div class="container mx-auto px-4 py-6">
         <div class="flex flex-col md:flex-row">
             <div class="showcase-text flex-auto">

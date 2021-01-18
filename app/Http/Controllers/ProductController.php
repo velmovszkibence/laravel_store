@@ -21,15 +21,17 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+
         $parents = Category::whereNull('parent_id')->get();
-        $subcategories = Category::whereNotNull('parent_id')->orderBy('name', 'asc')->get();
+        $subcategories = Category::whereNotNull('parent_id')->orderBy('category_name', 'asc')->get();
         $featured = ProductResource::collection(Product::inRandomOrder()->where('discount', '>', '0')->limit(6)->get());
 
         if($request->q) {
-            $products = ProductResource::collection(Product::query()
-            ->where('name', 'like', '%' . $request->q . '%')
-            ->orWhere('description', 'like', '%' . $request->q . '%')
-            ->orderBy('name', 'desc')->paginate(20));
+
+            $products = ProductResource::collection(Product::where('products.name', 'like', '%'. $request->q . '%')
+            ->orWhere('products.description', 'like', '%'. $request->q . '%')
+            ->orderBy('products.name', 'desc')->paginate(20));
+
         } else {
             $products = ProductResource::collection(Product::where('is_active', 1)->orderBy('name', 'desc')->paginate(20));
         }
@@ -39,9 +41,10 @@ class ProductController extends Controller
     public function show($id)
     {
       $product = Product::find($id);
+
       return view('show',
       [
-        'product' => $product
+        'product' => $product,
       ]);
     }
 
@@ -100,6 +103,7 @@ class ProductController extends Controller
         }
         $prevCart = Session::get('cart');
         $cart = new Cart($prevCart);
+
 
         return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }

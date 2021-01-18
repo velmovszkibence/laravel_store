@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'price', 'stock', 'description', 'image', 'is_active', 'discount', 'sold'
+        'name', 'price', 'stock', 'description', 'is_active', 'discount', 'sold', 'category_id'
     ];
 
     public function outOfStock() {
@@ -35,6 +35,14 @@ class Product extends Model
 
     public function calculatePrice() {
         return $this->price - ($this->price * $this->discount / 100);
+    }
+
+    public function category() {
+        return $this->belongsTo('App\Models\Category');
+    }
+
+    public function images() {
+        return $this->hasMany('App\Models\Image');
     }
 
 }

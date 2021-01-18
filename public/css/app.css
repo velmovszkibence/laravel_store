@@ -21207,10 +21207,6 @@ textarea {
   display: block;
 }
 
-.toggle-input:checked + label {
-  color: white;
-}
-
 .toggle-input:checked ~ label:after {
   content: "\25B2";
   font-size: 10px;

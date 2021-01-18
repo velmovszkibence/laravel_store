@@ -33,14 +33,14 @@
                         <span class="md:col-span-2">{{ $order->name }}</span>
                         <span class="hidden col-span-2 md:block">{{ $order->address }}, {{ $order->city }} {{ $order->country }}, {{ $order->zipcode }}</span>
                         <span class="md:col-span-2">{{ $order->created_at }}</span>
-                        <button class="hidden outline-none focus:outline-none focus:shadow-none border order-options shadow-sm ml-auto p-2 md:col-span-2 md:flex md:flex-row md:justify-evenly md:w-full">
+                        <button class="hidden border border-white outline-none focus:outline-none focus:shadow-none hover:border-transparent hover:bg-white order-options ml-auto p-2 md:col-span-2 md:flex md:flex-row md:justify-evenly md:w-full">
                             <span class="ml-auto">{{ $order->status }}</span>
                             <svg class="w-4 ml-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
 
-                        <ul class="order-option-list hidden bg-white text-white px-10 pt-20 pb-8 z-10 border-b shadow-inner shadow-2xl">
+                        <ul class="order-option-list hidden bg-white text-white px-12 pt-20 pb-8 z-10 border-b shadow-inner shadow-2xl">
                             <li>
                                 {!! Form::open(['method'=>'PATCH','action'=>['App\Http\Controllers\AdminController@updateOrderStatus']]) !!}
                                     <input type="hidden" name="status" value="Pending">
@@ -72,14 +72,14 @@
                         <span class="md:col-span-2">{{ $order->name }}</span>
                         <span class="hidden col-span-2 md:block">{{ $order->address }}, {{ $order->city }} {{ $order->country }}, {{ $order->zipcode }}</span>
                         <span class="md:col-span-2">{{ $order->created_at }}</span>
-                        <button class="hidden outline-none focus:outline-none focus:shadow-none border order-options shadow-sm ml-auto p-2 md:col-span-2 md:flex md:flex-row md:justify-evenly md:w-full">
+                        <button class="hidden border border-white outline-none focus:outline-none focus:shadow-none hover:border-transparent hover:bg-white order-options ml-auto p-2 md:col-span-2 md:flex md:flex-row md:justify-evenly md:w-full">
                             <span class="ml-auto">{{ $order->status }}</span>
                             <svg class="w-4 ml-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
 
-                        <ul class="order-option-list hidden bg-white text-white px-10 pt-20 pb-8 z-10 border-b shadow-inner shadow-2xl">
+                        <ul class="order-option-list hidden bg-white text-white px-12 pt-20 pb-8 z-10 border-b shadow-inner shadow-2xl">
                             <li>
                                 {!! Form::open(['method'=>'PATCH','action'=>['App\Http\Controllers\AdminController@updateOrderStatus']]) !!}
                                     <input type="hidden" name="status" value="Pending">
@@ -111,14 +111,14 @@
                         <span class="md:col-span-2">{{ $order->name }}</span>
                         <span class="hidden col-span-2 md:block">{{ $order->address }}, {{ $order->city }} {{ $order->country }}, {{ $order->zipcode }}</span>
                         <span class="md:col-span-2">{{ $order->created_at }}</span>
-                        <button class="hidden outline-none focus:outline-none focus:shadow-none border order-options shadow-sm ml-auto p-2 md:col-span-2 md:flex md:flex-row md:justify-evenly md:w-full">
+                        <button class="hidden border border-white outline-none focus:outline-none focus:shadow-none hover:border-transparent hover:bg-white order-options ml-auto p-2 md:col-span-2 md:flex md:flex-row md:justify-evenly md:w-full">
                             <span class="ml-auto">{{ $order->status }}</span>
                             <svg class="w-4 ml-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
 
-                        <ul class="order-option-list hidden bg-white text-white px-10 pt-20 pb-8 z-10 border-b shadow-inner shadow-2xl">
+                        <ul class="order-option-list hidden bg-white text-white px-12 pt-20 pb-8 z-10 border-b shadow-inner shadow-2xl">
                             <li>
                                 {!! Form::open(['method'=>'PATCH','action'=>['App\Http\Controllers\AdminController@updateOrderStatus']]) !!}
                                     <input type="hidden" name="status" value="Pending">

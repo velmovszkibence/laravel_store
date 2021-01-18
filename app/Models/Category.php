@@ -9,8 +9,10 @@ class Category extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
-        'name',
+        'category_name',
         'parent_id'
     ];
 
@@ -21,4 +23,5 @@ class Category extends Model
     public function subcategory() {
         return $this->hasMany('App\Models\Category', 'parent_id'); //get all subs. NOT RECURSIVE
     }
+
 }

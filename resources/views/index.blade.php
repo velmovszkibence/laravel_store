@@ -17,7 +17,7 @@
         </div>
     @endif
     {{-- Show featured products only if it's home page --}}
-    @if(strpos(url()->full(), 'page') == false)
+    @if(strpos(url()->full(), 'page') == false && strpos(url()->full(), '?q=') == false)
     <div class="featured-products pb-20 px-10" id="#featured">
         <h2 style="font-family: Overpass" class="uppercase tracking-widest text-xl italic text-center font-bold pb-8">
             Featured Products
@@ -28,7 +28,7 @@
                     <div class="product product-for-sale relative my-10 h-64 mx-auto">
                         <span class="off absolute transform rotate-45 text-white text-md text-semibold">{{ $product->discount }}%<i class="text-xs"> OFF</i></span>
                         <a href="{{ route('product.show', $product['id']) }}">
-                            <img src="/images/{{ $product['image'] }}" alt="productimg" class="h-56 mx-auto product-img" />
+                            <img src="/images/{{ $product->images[0]['image'] }}" alt="productimg" class="h-56 mx-auto product-img" />
                             <h2 class="mt-4 text-sm">{{ $product['name'] }}</h2>
                             <div class="flex flex-row">
                                 <h2 class="pt-2 w-1/3 line-through text-sm text-right">${{ $product['price'] }}</h2>
@@ -60,7 +60,7 @@
 </div>
 <div class="container mx-auto my-20">
     <div class="new-products px-10" id="new">
-        @if(strpos(url()->full(), 'page') == false)
+        @if(strpos(url()->full(), 'page') == false && strpos(url()->full(), '?q=') == false)
         <h2 style="font-family: Overpass" class="uppercase tracking-widest text-xl italic text-center font-bold pb-8">
             New Products
         </h2>
@@ -72,7 +72,7 @@
                         <div class="product product-for-sale relative my-10 h-64 mx-auto">
                             <span class="off absolute transform rotate-45 text-white text-md text-semibold">{{ $product->discount }}%<i class="text-xs"> OFF</i></span>
                             <a href="{{ route('product.show', $product['id']) }}">
-                                <img src="/images/{{ $product['image'] }}" alt="productimg" class="h-56 mx-auto product-img" />
+                                <img src="/images/{{ $product->images[0]['image'] }}" alt="productimg" class="h-56 mx-auto product-img" />
                                 <h2 class="mt-4 text-sm">{{ $product['name'] }}</h2>
                                 <div class="flex flex-row">
                                     <h2 class="pt-2 w-1/3 line-through text-sm text-right">${{ $product['price'] }}</h2>
@@ -100,7 +100,7 @@
                     @else
                     <div class="product relative my-10 h-64 mx-auto">
                         <a href="{{ route('product.show', $product['id']) }}">
-                            <img src="/images/{{ $product['image'] }}" alt="productimg" class="h-56 mx-auto product-img" />
+                            <img src="/images/{{ $product->images[0]['image']}}" alt="productimg" class="h-56 mx-auto product-img" />
                             <h2 class="mt-4 text-sm">{{ $product['name'] }}</h2>
                             <h2 class="pt-2 text-lg">${{ $product['price'] }}</h2>
                         </a>

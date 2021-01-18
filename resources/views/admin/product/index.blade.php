@@ -23,11 +23,11 @@
                 @foreach($products as $product)
                 <a href="{{ route('admin.product.edit', $product->id) }}">
                 <div class="grid grid-cols-2 mb-10 md:mb-0 sm:px-6 md:grid-cols-10 lg:grid-cols-12 xl:grid-cols-8 py-1 pr-6 items-center border-b dotted">
-                    <span class="mx-auto row-span-3 md:col-span-2 md:row-auto xl:col-span-1 xl:row-span-1"><img class="h-24 w-24" src="/images/{{$product->image }}"/></span>
+                    <span class="mx-auto row-span-3 md:col-span-2 md:row-auto xl:col-span-1 xl:row-span-1"><img class="h-24 w-24" src="/images/{{ $product->images[0]['image'] }}"/></span>
                     <span class="md:col-span-2 xl:col-span-1">{{ $product->name }}</span>
                     <p class="hidden overflow-hidden max-h-10 py-2 text-xs text-center md:max-h-24 md:col-span-2 md:text-xs lg:block">{{ $product->description }}</p>
                     <span class="py-2">$ {{ $product->price }}</span>
-                    <span>{{ $product->stock }}</span>
+                    <span>stock: {{ $product->stock }}</span>
                     <div class="my-4 md:my-0 md:mx-auto md:col-span-2 xl:col-span-1">
                     @if ($product->is_active == 1)
                         {!! Form::open(['method'=>'PATCH','action'=>['App\Http\Controllers\AdminController@activateProduct']]) !!}
@@ -61,7 +61,7 @@
         </div>
         <div class="panel-2 tab-content mt-10">
             <div class="grid min-h-80 place-items-center">
-                <div class="mx-auto text-center text-xs sm:text-sm">
+                <div class="mx-auto text-center text-xs sm:text-sm w-full lg:w-4/5">
                     @include('admin.product.create')
                 </div>
             </div>

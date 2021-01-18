@@ -8,7 +8,7 @@
                 @foreach($products as $product)
                     <div class="grid grid-cols-4 mb-10 pt-5 border-t-2 lg:grid-cols-8 lg:items-center">
                         <div class="col-span-2 mx-auto product-image">
-                            <img src="/images/{{ $product['item']['image'] }}" class="h-32 w-32 xl:h-64 xl:w-64" />
+                            <img src="/images/{{ $product['item']->images[0]['image'] }}" class="h-32 w-32 xl:h-64 xl:w-64" />
                         </div>
                         <div class="col-span-2 mx-auto w-full product-quantity flex items-center justify-evenly">
                             <h2 class="w-1/2 align-bottom text-center">{{ $product['quantity'] }}</h2>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
@@ -80,6 +81,7 @@ class AdminController extends Controller
 
     public function storeProduct(Request $request) {
         $input = $request->all();
+        dd($request->all());
         if($file = $request->file('product-image')) {
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);
@@ -97,16 +99,37 @@ class AdminController extends Controller
     }
 
     public function updateProduct(Request $request, $id) {
-        $input = array_filter($request->all());
-        // if(empty($request->input('category_id'))) {
-        //     $input = $request->except('category_id');
-        // }
-        if($file = $request->file('product-image')) {
-            $name = time() . $file->getClientOriginalName();
-            $file->move('images', $name);
-            $input['image'] = $name;
+        // strlen let 0 value pass
+        $req = $request->except('product_image');
+        $input = array_filter($req, 'strlen');
+        $product_images = Product::find($id)->images->all();
+        $array = [];
+        foreach ($product_images as $img) {
+            array_push($array, $img->image);
+        }
+        if($request->hasFile('product_image')) {
 
-            // Product::findOrFail($id)->image()->delete();
+            foreach ($request->product_image as $file) {
+                $name = $file->getClientOriginalName();
+                if(!in_array($name, $array)) {
+
+                }
+                $file->move('images', $name);
+                $input['image'] = $name;
+                if(Image::where('product_id', '=', $id)) {
+                    $images = Image::where('product_id', '=', $id)->get();
+
+                    dd(Product::find($id)->images->all());
+                    if($images->image != $name) {
+                        $images->update($name);
+                    }
+                } else {
+                    $image = new Image();
+                    $image->image = $name;
+                    $image->product_id = $id;
+                    $image->save();
+                }
+            }
         }
 
         Product::find($id)->update($input);
