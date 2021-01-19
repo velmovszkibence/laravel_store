@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Image;
+use App\Models\Category;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
@@ -71,12 +72,13 @@ class AdminController extends Controller
             ->where('name', 'like', '%' . $request->q . '%')
             ->orWhere('description', 'like', '%' . $request->q . '%')
             ->orderBy('name', 'desc')->paginate(5);
-            $count = $products->count();
+            if(count($products) == 0) {
+                return redirect()->to('admin/product')->with('not-found', 'No results found');
+            }
         } else {
             $products = Product::orderBy('created_at', 'desc')->paginate(5);
-            $count = $products->count();
         }
-        return view('admin.product.index', ['products' => $products, 'count' => $count]);
+        return view('admin.product.index', ['products' => $products]);
     }
 
     public function storeProduct(Request $request) {
@@ -160,6 +162,22 @@ class AdminController extends Controller
 
     }
 
+    public function getCategoryPage() {
+        $parents = Category::whereNull('parent_id')->get();
+        $subcategories = Category::whereNotNull('parent_id')->orderBy('category_name', 'asc')->get();
+        return view('admin.category.index', ['parents' => $parents, 'subcategories' => $subcategories]);
+    }
+
+    public function storeCategory(Request $request) {
+        $category = new Category();
+        $category->category_name = $request->category;
+        if($request->parent) {
+            $category->parent_id = $request->parent;
+        }
+        $category->save();
+        return redirect()->back()->with('success_message', 'Category successfully created!');
+    }
+
     public function getStatisticPage() {
         return view('admin.statistic.index');
     }
@@ -167,5 +185,6 @@ class AdminController extends Controller
     public function getStockPage() {
         return view('admin.stock.index');
     }
+
 
 }

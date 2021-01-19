@@ -10,10 +10,6 @@
                 <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:mx-auto">
                     <a href="#new" class="nav-item lg:px-3">New Products</a>
                 </li>
-                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:mx-auto">
-                    <a href="#" class="nav-item lg:px-3">Contact</a>
-                </li>
-
                 @if(Request::is('/'))
                 <li class="toggleable hoverable w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:mx-auto">
                     <input type="checkbox" value="selected" id="toggle-one" class="toggle-input">
@@ -26,13 +22,13 @@
                             <ul class="px-4 w-full sm:w-1/2 lg:w-1/4 border-red-600 border-b sm:border-r lg:border-b-0 pb-6 pt-6 lg:pt-3">
                                 <h3 class="font-bold text-xl text-white text-bold mb-2">{{ $parent->category_name }}</h3>
                                 @if($subcategories)
-                                @foreach($subcategories as $category)
-                                    @if($parent->id == $category->parent_id)
-                                    <li>
-                                        <a href="#" class="block p-3 lg:pl-24 hover:bg-white text-white hover:text-orange text-center lg:text-left">{{ $category->category_name }}</a>
-                                    </li>
-                                    @endif
-                                @endforeach
+                                    @foreach($subcategories as $category)
+                                        @if($parent->id == $category->parent_id)
+                                        <li>
+                                            <a href="#" class="block p-3 lg:pl-24 hover:bg-white text-white hover:text-orange text-center lg:text-left">{{ $category->category_name }}</a>
+                                        </li>
+                                        @endif
+                                    @endforeach
                                 @endif
                             </ul>
                             @endforeach
@@ -41,7 +37,9 @@
                     @endif
                 </li>
                 @endif
-
+                <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:mx-auto">
+                    <a href="#" class="nav-item lg:px-3">Contact</a>
+                </li>
                 <li class="search-form mt-10 pr-8 mx-auto sm:pr-0 lg:col-span-3 lg:mt-0">
                     <?php $link = ['route' => 'product.index'] ?>
                     @include('includes.searchform', $link)

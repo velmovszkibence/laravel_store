@@ -47,7 +47,7 @@
 
                 </div>
 
-                <div class="flex flex-col mx-auto mt-4 justify-evenly">
+                <div class="flex flex-col mx-auto mt-4 xl:mt-0 justify-evenly">
                     <div class="flex flex-col xl:flex-row xl:items-end">
                         <div class="w-full xl:w-1/3 px-3 mb-8">
                             <img src="/images/{{ !empty($product->images[0]->image) ? $product->images[0]->image : '' }}" id="product-image-src-f" class="mx-auto mb-10" width="200px" />

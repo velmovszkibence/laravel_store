@@ -47,5 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::patch('/edit-product/{id}', 'App\Http\Controllers\AdminController@updateProduct');
     Route::patch('/activate-product', 'App\Http\Controllers\AdminController@activateProduct');
     Route::post('/destroy-product/{id}', 'App\Http\Controllers\AdminController@destroyProduct');
+    Route::get('/category', 'App\Http\Controllers\AdminController@getCategoryPage')->name('admin.category.index');
+    Route::post('/category', 'App\Http\Controllers\AdminController@storeCategory');
 
 });
