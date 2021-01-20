@@ -82,15 +82,34 @@ class AdminController extends Controller
     }
 
     public function storeProduct(Request $request) {
-        $input = $request->all();
-        dd($request->all());
-        if($file = $request->file('product-image')) {
-            $name = time() . $file->getClientOriginalName();
-            $file->move('images', $name);
-            $input['image'] = $name;
+        $input = $this->validate($request, [
+            'name' => 'required|min:5|string|unique:products,name',
+            'price' => 'required|min:1|integer',
+            'discount' => 'required|integer',
+            'stock' => 'required|integer',
+            'description' => 'required|string|min:10|max:500',
+            'images' => 'required|array'
+        ]);
+        
+        $product = new Product;
+        $product->name = $input['name'];
+        $product->price = $input['price'];
+        $product->stock = $input['stock'];
+        $product->description = $input['description'];
+        $product->discount = $input['discount'];
+        $product->save();
+        
+        if($request->images) {
+            foreach($request->images as $requestimg) {
+                $name = $requestimg->getClientOriginalName();
+                $requestimg->move('images', $name);
+                $input['image'] = $name;
+                $image = new Image;
+                $image->image = $name;
+                $image->product_id = $product->id;
+                $image->save();
+            }
         }
-
-        Product::create($input);
 
         return redirect()->back()->with('success_message', 'Product successfully created!');
     }
@@ -176,6 +195,18 @@ class AdminController extends Controller
         }
         $category->save();
         return redirect()->back()->with('success_message', 'Category successfully created!');
+    }
+
+    public function deleteCategory($id) {
+        $category = Category::find($id);
+        if($category->parent_id == null) {
+            $categories = Category::where('parent_id', '=', $category->id)->get();
+            foreach($categories as $item) {
+                $item->delete();
+            }
+        }
+        $category->delete();
+        return redirect()->back()->with('success_message', 'Category successfully deleted');
     }
 
     public function getStatisticPage() {

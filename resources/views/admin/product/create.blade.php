@@ -18,7 +18,7 @@
                     <label class="block text-white text-sm font-semibold" for="discount">
                         Discount
                     </label>
-                    <input class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="discount" name="discount" type="number" placeholder="0 %">
+                    <input value="0" class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="discount" name="discount" type="number" placeholder="0 %">
                 </div>
             </div>
             <div class="w-full px-3 mb-8">
@@ -41,17 +41,17 @@
                 <div class="w-full xl:w-1/3 px-3 mb-8">
                     <img id="product-image-src-f" class="mx-auto mb-10" width="200px" />
                     <a onclick="document.getElementById('product-image-f').click()" class="w-2/3 py-1 cursor-pointer shadow bg-blue-600 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold md:py-2 px-4 rounded">Upload Image</a>
-                    <input type="file" class="hidden" id="product-image-f" name="product-image-f" required>
+                    <input type="file" class="hidden" id="product-image-f" name="images[]" required>
                 </div>
                 <div class="w-full xl:w-1/3 px-3 mb-8">
                     <img id="product-image-src-s" class="mx-auto mb-10" width="200px" />
                     <a onclick="document.getElementById('product-image-s').click()" class="w-2/3 py-1 cursor-pointer shadow bg-blue-600 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold md:py-2 px-4 rounded">Upload Image</a>
-                    <input type="file" class="hidden" id="product-image-s" name="product-image-s" required>
+                    <input type="file" class="hidden" id="product-image-s" name="images[]" required>
                 </div>
                 <div class="w-full xl:w-1/3 px-3 mb-8">
                     <img id="product-image-src-t" class="mx-auto mb-10" width="200px" />
                     <a onclick="document.getElementById('product-image-t').click()" class="w-2/3 py-1 cursor-pointer shadow bg-blue-600 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold md:py-2 px-4 rounded">Upload Image</a>
-                    <input type="file" class="hidden" id="product-image-t" name="product-image-t" required>
+                    <input type="file" class="hidden" id="product-image-t" name="images[]" required>
                 </div>
             </div>
 

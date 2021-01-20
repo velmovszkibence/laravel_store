@@ -49,5 +49,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::post('/destroy-product/{id}', 'App\Http\Controllers\AdminController@destroyProduct');
     Route::get('/category', 'App\Http\Controllers\AdminController@getCategoryPage')->name('admin.category.index');
     Route::post('/category', 'App\Http\Controllers\AdminController@storeCategory');
+    Route::post('/delete-category/{id}', 'App\Http\Controllers\AdminController@deleteCategory')->name('admin.category.delete');
 
 });

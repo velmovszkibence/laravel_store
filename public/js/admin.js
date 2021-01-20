@@ -12,6 +12,8 @@ const product_image_src_t = document.getElementById('product-image-src-t')
 const menu_btn = document.getElementById('menu-btn')
 const order_options = document.querySelectorAll('.order-options')
 const flash_msg = document.querySelectorAll('.flash-msg')
+const delete_category = document.querySelectorAll('.delete-category')
+
 var clickedBtn = null;
 
 function onTabClick(event) {
@@ -145,3 +147,10 @@ if(flash_msg.length > 0) {
         flash_msg[0].addEventListener('transitionend', () => flash_msg[0].remove())
     }, 4000)
 }
+
+// Submit category delete
+delete_category.forEach(function(item) {
+    item.addEventListener('click', function() {
+        item.nextElementSibling.click()
+    })
+})

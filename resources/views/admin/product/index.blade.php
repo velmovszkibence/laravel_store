@@ -31,7 +31,7 @@
                     @foreach($products as $product)
                     <a href="{{ route('admin.product.edit', $product->id) }}">
                     <div class="grid grid-cols-2 mb-10 md:mb-0 sm:px-6 md:grid-cols-10 lg:grid-cols-12 xl:grid-cols-8 py-1 pr-6 items-center border-b dotted">
-                        <span class="mx-auto row-span-3 md:col-span-2 md:row-auto xl:col-span-1 xl:row-span-1"><img class="h-24 w-24" src="/images/{{ $product->images[0]['image'] }}"/></span>
+                        <span class="mx-auto row-span-3 md:col-span-2 md:row-auto xl:col-span-1 xl:row-span-1"><img class="h-24 w-24" src="/images/{{ !empty($product->images[0]->image) ? $product->images[0]->image : '' }}"/></span>
                         <span class="md:col-span-2 xl:col-span-1">{{ $product->name }}</span>
                         <p class="hidden overflow-hidden max-h-10 py-2 text-xs text-center md:max-h-24 md:col-span-2 md:text-xs lg:block">{{ $product->description }}</p>
                         <span class="py-2">$ {{ $product->price }}</span>

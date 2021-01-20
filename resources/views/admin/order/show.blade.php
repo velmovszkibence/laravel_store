@@ -35,14 +35,6 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
     <div class="mt-10">
         <h1 class="bg-gray-200 text-left py-1 px-6">Ordered Products</h1>
         <div class="grid grid-rows-4 grid-flow-col sm:grid-cols-4 sm:grid-flow-row mt-5">

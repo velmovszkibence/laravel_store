@@ -2,7 +2,7 @@
 
 @section('content')
 <nav class="tabs flex flex-col sm:flex-row px-10 py-2 mb-2">
-    <a href="{{ url()->previous() }}" class="text-sm tracking-widest text-white py-2 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 active">
+    <a href="{{ route('admin.dashboard') }}" class="text-sm tracking-widest text-white py-2 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 active">
         <svg class="w-10 p-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
         </svg>
@@ -45,12 +45,34 @@
             <div class="flex flex-col list-none mx-auto sm:w-2/3">
                 @foreach($parents as $parent)
 
-                    <ul class="text-left pl-8 bg-teal-600 text-white">{{ $parent->category_name }}</ul>
+                    <ul class="bg-teal-600">
+                        {!! Form::open(['method'=>'POST','action'=>['App\Http\Controllers\AdminController@deleteCategory', $parent->id]]) !!}
+                            <div class='form-group flex items-center'>
+                                <span class="block my-auto w-full text-left pl-8 text-white">{{ $parent->category_name }}</span>
+                                <a class="bg-gray-200 delete-category">
+                                    <svg class="w-8 p-2 bg-red-400 hover:bg-red-600 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </a>
+                                <input type="submit" class="hidden" onclick="return confirm('Are you sure you want to remove this category and all subcategories?')">
+                            </div>
+                        {!! Form::close() !!}
+                    </ul>
                     @if($subcategories)
                         @foreach($subcategories as $category)
                             @if($parent->id == $category->parent_id)
                             <li>
-                                <span class="block p-2 text-center bg-gray-200">{{ $category->category_name }}</span>
+                                {!! Form::open(['method'=>'POST','action'=>['App\Http\Controllers\AdminController@deleteCategory', $category->id]]) !!}
+                                    <div class='form-group flex items-center'>
+                                        <span class="block w-full p-2 text-center bg-gray-200">{{ $category->category_name }}</span>
+                                        <a class="delete-category">
+                                            <svg class="w-8 p-2 bg-red-400 hover:bg-red-600 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </a>
+                                        <input type="submit" class="hidden" onclick="return confirm('Are you sure you want to remove this category?')">
+                                    </div>
+                                {!! Form::close() !!}
                             </li>
                             @endif
                         @endforeach
