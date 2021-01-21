@@ -8,7 +8,6 @@ module.exports = {
     extend: {
         colors: {
             'orange': '#FF8B15',
-            'c'
         },
         minHeight: {
             '80': '80%',

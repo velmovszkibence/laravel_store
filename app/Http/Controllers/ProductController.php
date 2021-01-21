@@ -21,36 +21,43 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-
         $parents = Category::whereNull('parent_id')->get();
         $subcategories = Category::whereNotNull('parent_id')->orderBy('category_name', 'asc')->get();
         $featured = ProductResource::collection(Product::inRandomOrder()->where('discount', '>', '0')->limit(6)->get());
+        if($parents && $subcategories && $featured) {
+            if($request->q) {
+                $input = $this->validate($request, [
+                    'q' => 'min:3|max:30|string'
+                ]);
 
-        if($request->q) {
+                $products = ProductResource::collection(Product::where('products.name', 'like', '%'. $input['q'] . '%')
+                ->orWhere('products.description', 'like', '%'. $input['q'] . '%')
+                ->orderBy('products.name', 'desc')->paginate(20));
+            } else {
+                $products = ProductResource::collection(Product::where('is_active', 1)->orderBy('name', 'desc')->paginate(20));
+            }
 
-            $products = ProductResource::collection(Product::where('products.name', 'like', '%'. $request->q . '%')
-            ->orWhere('products.description', 'like', '%'. $request->q . '%')
-            ->orderBy('products.name', 'desc')->paginate(20));
-
-        } else {
-            $products = ProductResource::collection(Product::where('is_active', 1)->orderBy('name', 'desc')->paginate(20));
+            return view('index', ['products' => $products, 'parents' => $parents, 'subcategories' => $subcategories, 'featured' => $featured]);
         }
-        return view('index', ['products' => $products, 'parents' => $parents, 'subcategories' => $subcategories, 'featured' => $featured]);
+
+        return redirect()->route('product.index')->with('error-msg', 'Something went wrong');
     }
 
     public function show($id)
     {
       $product = Product::find($id);
-
-      return view('show',
-      [
-        'product' => $product,
-      ]);
+      if($product) {
+        return view('show',['product' => $product,]);
+      }
+      return redirect()->route('product.index')->with('error-msg', 'Something went wrong');
     }
 
     public function addToCart(Request $request, $id)
     {
         $product = Product::find($id);
+        if($product->outOfStock()) {
+            return redirect()->route('product.index')->with('error-msg', 'This product is not available');
+        }
         $prevCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($prevCart);
         $cart->addItem($product, $product->id);

@@ -8,24 +8,45 @@
                 <input class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="name" name="name" type="text" required placeholder="Blue T-shirt">
             </div>
             <div class="w-full flex flex-col sm:flex-row px-3 mb-8 justify-evenly">
-                <div class="w-1/3">
+                <div class="w-1/4">
                     <label class="block text-white text-sm font-semibold" for="price">
                         Price
                     </label>
                     <input class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="price" name="price" type="number" placeholder="30.4" step="0.01">
                 </div>
-                <div class="w-1/3">
+                <div class="w-1/4">
                     <label class="block text-white text-sm font-semibold" for="discount">
                         Discount
                     </label>
                     <input value="0" class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="discount" name="discount" type="number" placeholder="0 %">
                 </div>
+                <div class="w-1/4">
+                    <label class="block text-white text-sm font-semibold" for="stock">
+                        Stock
+                    </label>
+                    <input class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="stock" name="stock" type="number" placeholder="15">
+                </div>
             </div>
             <div class="w-full px-3 mb-8">
-                <label class="block text-white text-sm font-semibold" for="stock">
-                    Stock
+                <label class="block text-white text-sm font-semibold" for="category">
+                    Category
                 </label>
-                <input class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="stock" name="stock" type="number" placeholder="15">
+
+                <select name="category" id="category" class="appearance-none border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none">
+                    <option value="{{ 0 }}">-------</option>
+                    @if($parents && $subcategories)
+                        @foreach($parents as $parent)
+                        <option class="bg-gray-700 text-white">{{ $parent->category_name }}</option>
+                            @if($subcategories)
+                                @foreach($subcategories as $category)
+                                    @if($parent->id == $category->parent_id)
+                                        <option value="{{ $category->id }}">--{{ $category->category_name }}</option>
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+                    @endif
+                </select>
             </div>
             <div class="w-full px-3 mb-8">
                 <label class="block text-white text-sm font-semibold" for="description">

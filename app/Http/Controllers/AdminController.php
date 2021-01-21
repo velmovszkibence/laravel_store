@@ -68,37 +68,50 @@ class AdminController extends Controller
 
     public function getProductPage(Request $request) {
         if($request->q) {
+            $input = $this->validate($request, [
+                'q' => 'required|min:3|max:30|string'
+            ]);
             $products = Product::query()
-            ->where('name', 'like', '%' . $request->q . '%')
-            ->orWhere('description', 'like', '%' . $request->q . '%')
+            ->where('name', 'like', '%' . $input['q'] . '%')
+            ->orWhere('description', 'like', '%' . $input['q'] . '%')
             ->orderBy('name', 'desc')->paginate(5);
             if(count($products) == 0) {
                 return redirect()->to('admin/product')->with('not-found', 'No results found');
             }
         } else {
+            $parents = Category::whereNull('parent_id')->get();
+            $subcategories = Category::whereNotNull('parent_id')->orderBy('category_name', 'asc')->get();
             $products = Product::orderBy('created_at', 'desc')->paginate(5);
         }
-        return view('admin.product.index', ['products' => $products]);
+
+        if($parents && $subcategories && $products) {
+
+            return view('admin.product.index', ['products' => $products, 'parents' => $parents, 'subcategories' => $subcategories]);
+        } else {
+            return redirect()->to('admin/product')->with('not-found', 'Something went wrong');
+        }
     }
 
     public function storeProduct(Request $request) {
         $input = $this->validate($request, [
             'name' => 'required|min:5|string|unique:products,name',
-            'price' => 'required|min:1|integer',
+            'price' => 'required|min:1|between:1,9999.99',
             'discount' => 'required|integer',
             'stock' => 'required|integer',
+            'category' => 'integer',
             'description' => 'required|string|min:10|max:500',
             'images' => 'required|array'
         ]);
-        
+
         $product = new Product;
         $product->name = $input['name'];
         $product->price = $input['price'];
         $product->stock = $input['stock'];
+        $product->category_id = $input['category'];
         $product->description = $input['description'];
         $product->discount = $input['discount'];
         $product->save();
-        
+
         if($request->images) {
             foreach($request->images as $requestimg) {
                 $name = $requestimg->getClientOriginalName();
@@ -116,7 +129,13 @@ class AdminController extends Controller
 
     public function getEditProductPage($id) {
         $product = Product::find($id);
-        return view('admin.product.edit', ['product' => $product]);
+        $parents = Category::whereNull('parent_id')->get();
+        $subcategories = Category::whereNotNull('parent_id')->orderBy('category_name', 'asc')->get();
+        if($product && $parents && $subcategories) {
+            return view('admin.product.edit', ['product' => $product, 'parents' => $parents, 'subcategories' => $subcategories]);
+        } else {
+            return redirect()->to('admin/product')->with('not-found', 'Something went wrong');
+        }
     }
 
     public function updateProduct(Request $request, $id) {

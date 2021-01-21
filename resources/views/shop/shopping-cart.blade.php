@@ -8,7 +8,7 @@
                 @foreach($products as $product)
                     <div class="grid grid-cols-4 mb-10 pt-5 border-t-2 lg:grid-cols-8 lg:items-center">
                         <div class="col-span-2 mx-auto product-image">
-                            <img src="/images/{{ $product['item']->images[0]['image'] }}" class="h-32 w-32 xl:h-64 xl:w-64" />
+                            <img src="/images/{{ !empty($product['item']->images[0]->image) ? $product['item']->images[0]->image : '' }}" class="h-32 w-32 xl:h-64 xl:w-64" />
                         </div>
                         <div class="col-span-2 mx-auto w-full product-quantity flex items-center justify-evenly">
                             <h2 class="w-1/2 align-bottom text-center">{{ $product['quantity'] }}</h2>
@@ -49,8 +49,11 @@
             </div>
         </div>
     @else
-        <div class="container mx-auto p-10 mt-16">
+        {{-- <div class="container mx-auto p-10 mt-16">
             <h1 class="p-4 bg-red-600 text-white">There are no items in your cart yet!</h1>
+        </div> --}}
+        <div class="container flex mx-auto p-4 mt-20 mb-10 bg-red-400 w-1/2 border-2 border-red-500 text-white shadow-lg rounded-lg">
+            <strong class="m-auto">There are no items in your cart yet!</strong>
         </div>
     @endif
 @endsection()

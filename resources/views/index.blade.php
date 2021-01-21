@@ -12,8 +12,13 @@
 
 <div class="container mx-auto my-20">
     @if(Session::has('success'))
-        <div class="flex flex-row mx-auto p-4 mb-10 bg-green-400 w-1/2 border-2 border-green-500 rounded-lg flash-msg">
+        <div class="flex flex-row mx-auto p-4 mb-10 bg-green-400 w-1/2 border-2 border-green-500 text-white shadow-lg rounded-lg flash-msg">
             <strong class="mx-auto">{{ Session::get('success') }}</strong><button class="ml-auto">X</button>
+        </div>
+    @endif
+    @if(Session::has('error-msg'))
+        <div class="flex flex-row mx-auto p-4 mb-10 bg-red-400 w-1/2 border-2 border-red-500 text-white shadow-lg rounded-lg flash-msg">
+            <strong class="mx-auto">{{ Session::get('error-msg') }}</strong><button class="ml-auto">X</button>
         </div>
     @endif
     {{-- Show featured products only if it's home page --}}
@@ -28,7 +33,7 @@
                     <div class="product product-for-sale relative my-10 h-64 mx-auto">
                         <span class="off absolute transform rotate-45 text-white text-md text-semibold">{{ $product->discount }}%<i class="text-xs"> OFF</i></span>
                         <a href="{{ route('product.show', $product['id']) }}">
-                            <img src="/images/{{ $product->images[0]['image'] }}" alt="productimg" class="h-56 mx-auto product-img" />
+                            <img src="/images/{{ !empty($product->images[0]->image) ? $product->images[0]->image : '' }}" alt="productimg" class="h-56 mx-auto product-img" />
                             <h2 class="mt-4 text-sm">{{ $product['name'] }}</h2>
                             <div class="flex flex-row">
                                 <h2 class="pt-2 w-1/3 line-through text-sm text-right">${{ $product['price'] }}</h2>

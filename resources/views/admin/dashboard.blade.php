@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="h-screen flex flex-col">
-        <div class="mx-auto w-3/4 pt-10 lg:w-full lg:px-4">
+        <div class="mx-auto w-3/4 pt-10 lg:w-full lg:px-20">
 
             <h1 class="mb-6">Overview</h1>
 
@@ -56,7 +56,7 @@
                 <div class="grid grid-cols gap-8 w-full mb-16 sm:grid-cols-2 lg:grid-cols-5">
                     @foreach($products as $product)
                         <div class="h-32 flex flex-col items-center text-center">
-                            <img class="h-24 w-24" src="/images/{{$product->image}}">
+                            <img class="h-24 w-24" src="/images/{{ !empty($product->images[0]->image) ? $product->images[0]->image : '' }}">
                             <span class="py-2 px-4">{{ $product->name }}</span>
                         </div>
                     @endforeach

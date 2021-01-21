@@ -4,7 +4,7 @@
             <ul class="flex flex-col mx-auto items-center font-semibold text-center w-1/2 text-sm lg:w-full lg:flex lg:flex-row xl:text-base">
                 <li class="hidden lg:block lg:mr-auto">
                     <a href="{{ route('product.index') }}" class="nav-item">
-                        E-Commerce Store
+                        Shop
                     </a>
                 </li>
                 <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:mx-auto">

@@ -16,18 +16,18 @@
     <div class="container product-container mx-auto mt-16 sm:px-12 sm:text-lg">
         <div class="grid grid-cols-1 lg:grid-cols-2 text-center">
             <div class="p-2 half-width flex flex-col">
-                <div class="w-3/4 mx-auto border-2 rounded-lg flex flex-col flex-1">
+                <div class="w-3/4 mx-auto border-4 rounded-lg flex flex-col flex-1">
                     <img class="w-48 sm:w-64 m-auto" src="/images/{{ $product->images[0]['image'] }}" alt="productimg" />
                 </div>
                 <div class="flex flex-1 items-center justify-between w-3/4 mx-auto mt-12">
                     @foreach($product->images as $image)
-                        <img class="w-16 sm:w-24 border-2 rounded-md rounded-lg p-1 cursor-pointer hover:bg-orange" src="/images/{{ $image->image }}" alt="productimg" />
+                        <img class="w-16 sm:w-24 border-4 rounded-lg p-1 cursor-pointer hover:border-orange" src="/images/{{ $image->image }}" alt="productimg" />
                     @endforeach
                 </div>
             </div>
             <div class="p-2 flex flex-col justify-between font-semibold">
                 <h2 class="mt-10">{{ $product['name'] }}</h2>
-                <p class="px-10 mt-10 font-thin">{{ $product['description'] }}</p>
+                <p class="px-10 mt-10 font-thin break-words overflow-y-auto">{{ $product['description'] }}</p>
                 <h2 class="mt-10">${{ $product['price'] }}</h2>
                 @if($product->inStock())
                 <button class="add-to-cart-btn mt-10 text-white rounded-lg flex mx-auto w-1/2 h-10">

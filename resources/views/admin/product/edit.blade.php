@@ -19,30 +19,53 @@
                         <input placeholder="{{ $product->name }}" class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="name" name="name" type="text">
                     </div>
                     <div class="w-full flex flex-col sm:flex-row px-3 mb-8 justify-evenly">
-                        <div class="w-1/3">
+                        <div class="w-1/4">
                             <label class="block text-white text-sm font-semibold" for="price">
                                 Price
                             </label>
                             <input placeholder="{{ $product->price }}" class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="price" name="price" type="number" step="0.01">
                         </div>
-                        <div class="w-1/3">
+                        <div class="w-1/4">
                             <label class="block text-white text-sm font-semibold" for="discount">
                                 Discount
                             </label>
                             <input placeholder="{{ $product->discount }} %" class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="discount" name="discount" type="number">
                         </div>
+                        <div class="w-1/4">
+                            <label class="block text-white text-sm font-semibold" for="stock">
+                                Stock
+                            </label>
+                            <input placeholder="{{ $product->stock }}" class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="stock" name="stock" type="number">
+                        </div>
                     </div>
                     <div class="w-full px-3 mb-8">
-                        <label class="block text-white text-sm font-semibold" for="stock">
-                            Stock
+                        <label class="block text-white text-sm font-semibold" for="category">
+                            Category
                         </label>
-                        <input placeholder="{{ $product->stock }}" class="border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" id="stock" name="stock" type="number">
+
+                        <select name="category" id="category" class="appearance-none border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none">
+                            @if(!empty($product->category->category_name))
+                            <option class="bg-green-300 text-white" value="{{ $product->category->id }}">{{ $product->category->parent->category_name}} / {{ $product->category->category_name }}</option>
+                            @endif
+                            @if($parents && $subcategories)
+                                @foreach($parents as $parent)
+                                <option class="bg-gray-700 text-white">{{ $parent->category_name }}</option>
+                                    @if($subcategories)
+                                        @foreach($subcategories as $category)
+                                            @if($parent->id == $category->parent_id)
+                                                <option value="{{ $category->id }}">--{{ $category->category_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            @endif
+                        </select>
                     </div>
                     <div class="w-full px-3 mb-8">
                         <label class="block text-white text-sm font-semibold" for="description">
                             Description
                         </label>
-                        <textarea placeholder="{{ $product->description }}" class="border-2 border-gray-800 rounded-lg block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" rows="10" id="description" name="description" cols="30"></textarea>
+                        <textarea class="border-2 border-gray-800 rounded-lg block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none" rows="10" id="description" name="description" cols="30">{{ $product->description }}</textarea>
                     </div>
 
                 </div>
