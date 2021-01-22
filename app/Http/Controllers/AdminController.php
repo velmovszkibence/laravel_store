@@ -7,8 +7,6 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Category;
-use Exception;
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -123,7 +121,6 @@ class AdminController extends Controller
                 $image->save();
             }
         }
-
         return redirect()->back()->with('success_message', 'Product successfully created!');
     }
 
@@ -152,7 +149,10 @@ class AdminController extends Controller
                 } else if($key == 2) {
                     $image = Image::where('product_id', '=', $id)->orderBy('id', 'ASC')->skip(2)->first();
                 }
-
+                if(empty($image)) {
+                    $image = new Image;
+                    $image->product_id = $id;
+                }
                 $name = $file->getClientOriginalName();
                 $file->move('images', $name);
                 $image->image = $name;
@@ -161,7 +161,7 @@ class AdminController extends Controller
         }
 
         Product::find($id)->update($input);
-        return redirect()->to('/admin/product')->with('success_message', 'Product successfully updated!');
+        return redirect()->to('admin/product')->with('success_message', 'Product successfully updated!');
     }
 
     public function activateProduct(Request $request) {
@@ -177,10 +177,13 @@ class AdminController extends Controller
     public function destroyProduct($id)
     {
         $product = Product::find($id);
-        $img_path = str_replace('\\', '/', public_path().'/'.$product->image);
-
-        if(File::exists($img_path)) {
-            File::delete($img_path);
+        foreach ($product->images as $image) {
+            if($image) {
+                $image_path = public_path() .  '\images\\'. $image->image;
+                if(file_exists($image_path)) {
+                    unlink($image_path);
+                }
+            }
         }
 
         $product->delete();
