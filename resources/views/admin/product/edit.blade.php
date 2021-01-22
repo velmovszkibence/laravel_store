@@ -75,17 +75,17 @@
                         <div class="w-full xl:w-1/3 px-3 mb-8">
                             <img src="/images/{{ !empty($product->images[0]->image) ? $product->images[0]->image : '' }}" id="product-image-src-f" class="mx-auto mb-10" width="200px" />
                             <a onclick="document.getElementById('product-image-f').click()" class="w-2/3 py-1 cursor-pointer shadow bg-blue-600 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold md:py-2 px-4 rounded">Upload Image</a>
-                            <input value="{{ !empty($product->images[0]->image) ? $product->images[0]->image : null }}" type="file" class="hidden" id="product-image-f" name="product_image[]" multiple>
+                            <input type="file" class="hidden" id="product-image-f" name="product_image[]" multiple>
                         </div>
                         <div class="w-full xl:w-1/3 px-3 mb-8">
                             <img src="/images/{{ !empty($product->images[1]->image) ? $product->images[1]->image : '' }}" id="product-image-src-s" class="mx-auto mb-10" width="200px" />
                             <a onclick="document.getElementById('product-image-s').click()" class="w-2/3 py-1 cursor-pointer shadow bg-blue-600 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold md:py-2 px-4 rounded">Upload Image</a>
-                            <input value="{{ !empty($product->images[1]->image) ? $product->images[1]->image : null }}" type="file" class="hidden" id="product-image-s" name="product_image[]" multiple>
+                            <input type="file" class="hidden" id="product-image-s" name="product_image[]" multiple>
                         </div>
                         <div class="w-full xl:w-1/3 px-3 mb-8">
                             <img src="/images/{{ !empty($product->images[2]->image) ? $product->images[2]->image : '' }}" id="product-image-src-t" class="mx-auto mb-10" width="200px" />
                             <a onclick="document.getElementById('product-image-t').click()" class="w-2/3 py-1 cursor-pointer shadow bg-blue-600 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold md:py-2 px-4 rounded">Upload Image</a>
-                            <input value="{{ !empty($product->images[2]->image) ? $product->images[2]->image : null }}" type="file" class="hidden" id="product-image-t" name="product_image[]" multiple>
+                            <input type="file" class="hidden" id="product-image-t" name="product_image[]" multiple>
                         </div>
                     </div>
 

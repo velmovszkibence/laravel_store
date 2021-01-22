@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Category;
+use Exception;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
@@ -116,7 +117,6 @@ class AdminController extends Controller
             foreach($request->images as $requestimg) {
                 $name = $requestimg->getClientOriginalName();
                 $requestimg->move('images', $name);
-                $input['image'] = $name;
                 $image = new Image;
                 $image->image = $name;
                 $image->product_id = $product->id;
@@ -142,33 +142,21 @@ class AdminController extends Controller
         // strlen let 0 value pass
         $req = $request->except('product_image');
         $input = array_filter($req, 'strlen');
-        $product_images = Product::find($id)->images->all();
-        $array = [];
-        foreach ($product_images as $img) {
-            array_push($array, $img->image);
-        }
+
         if($request->hasFile('product_image')) {
+            foreach ($request->product_image as $key => $file) {
+                if($key == 0) {
+                    $image = Image::where('product_id', '=', $id)->orderBy('id', 'ASC')->first();
+                } else if($key == 1) {
+                    $image = Image::where('product_id', '=', $id)->orderBy('id', 'ASC')->skip(1)->first();
+                } else if($key == 2) {
+                    $image = Image::where('product_id', '=', $id)->orderBy('id', 'ASC')->skip(2)->first();
+                }
 
-            foreach ($request->product_image as $file) {
                 $name = $file->getClientOriginalName();
-                if(!in_array($name, $array)) {
-
-                }
                 $file->move('images', $name);
-                $input['image'] = $name;
-                if(Image::where('product_id', '=', $id)) {
-                    $images = Image::where('product_id', '=', $id)->get();
-
-                    dd(Product::find($id)->images->all());
-                    if($images->image != $name) {
-                        $images->update($name);
-                    }
-                } else {
-                    $image = new Image();
-                    $image->image = $name;
-                    $image->product_id = $id;
-                    $image->save();
-                }
+                $image->image = $name;
+                $image->save();
             }
         }
 
