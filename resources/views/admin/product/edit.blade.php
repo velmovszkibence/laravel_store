@@ -44,8 +44,8 @@
                         </label>
 
                         <select name="category" id="category" class="appearance-none border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none">
-                            @if(!empty($product->category->category_name))
-                            <option class="bg-green-300 text-white" value="{{ $product->category->id }}">{{ $product->category->parent->category_name}} / {{ $product->category->category_name }}</option>
+                            @if(!empty($product->category->category_name) && !empty($product->category->parent->category_name))
+                            <option value="0" class="bg-green-300 text-white">{{ $product->category->parent->category_name}} / {{ $product->category->category_name }}</option>
                             @endif
                             @if($parents && $subcategories)
                                 @foreach($parents as $parent)

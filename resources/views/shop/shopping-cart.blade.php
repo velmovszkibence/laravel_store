@@ -49,9 +49,6 @@
             </div>
         </div>
     @else
-        {{-- <div class="container mx-auto p-10 mt-16">
-            <h1 class="p-4 bg-red-600 text-white">There are no items in your cart yet!</h1>
-        </div> --}}
         <div class="container flex mx-auto p-4 mt-20 mb-10 bg-red-400 w-1/2 border-2 border-red-500 text-white shadow-lg rounded-lg">
             <strong class="m-auto">There are no items in your cart yet!</strong>
         </div>

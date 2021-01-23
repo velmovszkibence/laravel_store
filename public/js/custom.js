@@ -3,6 +3,7 @@ const products = document.querySelectorAll('.product')
 const nav_items = document.querySelectorAll('.nav-item')
 const menu_btn = document.getElementById('menu-btn')
 const flash_msg = document.querySelectorAll('.flash-msg')
+const product_images = document.querySelectorAll('.product-images')
 
 products.forEach(function(item) {
     item.addEventListener('mouseenter', function() {
@@ -12,15 +13,6 @@ products.forEach(function(item) {
         item.lastElementChild.style.display = 'none'
     })
 })
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     const success = document.getElementById('success-message')
-//     if(success != null) {
-//         setTimeout(function() {
-//             success.classList.add('hidden')
-//         }, 5000)
-//     }
-// })
 
 nav_items.forEach(function(item) {
     item.addEventListener('mouseenter', function() {
@@ -50,4 +42,13 @@ if(flash_msg.length > 0) {
         flash_msg[0].style.opacity = '0'
         flash_msg[0].addEventListener('transitionend', () => flash_msg[0].remove())
     }, 4000)
+}
+
+// Show page replace image on click
+if(product_images) {
+    product_images.forEach(function(image) {
+        image.addEventListener('click', function() {
+            image.parentElement.previousElementSibling.lastElementChild.src = image.src
+        })
+    })
 }

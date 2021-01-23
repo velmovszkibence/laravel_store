@@ -16,7 +16,10 @@ module.exports = {
         maxHeight: {
           '10': '2.5rem',
           '20':	'5rem',
-          '24': '6rem'
+          '24': '6rem',
+          '3/4': '75%',
+          '80': '80%',
+          '90': '90%',
         },
         transitionDuration: {
             '2000': '2000ms',

@@ -2,32 +2,25 @@
 
 @section('content')
 
-    {{-- <div class="w-full h-full loading">
-        <span class="top-1/2 my-0 mx-auto my-auto block relative w-0 h-0" style="
-            top: 50%;">
-        <svg width="80" height="80" viewBox="0 0 50 50">
-            <path fill="#48bb78" d="M25,5A20.14,20.14,0,0,1,45,22.88a2.51,2.51,0,0,0,2.49,2.26h0A2.52,2.52,0,0,0,50,22.33a25.14,25.14,0,0,0-50,0,2.52,2.52,0,0,0,2.5,2.81h0A2.51,2.51,0,0,0,5,22.88,20.14,20.14,0,0,1,25,5Z">
-                <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.7s" repeatCount="indefinite" />
-            </path>
-        </svg>
-        </span>
-    </div> --}}
-
-    <div class="container product-container mx-auto mt-16 sm:px-12 sm:text-lg">
+    <div class="container product-container mx-auto mt-16 lg:mt-32 sm:px-12 sm:text-lg">
         <div class="grid grid-cols-1 lg:grid-cols-2 text-center">
             <div class="p-2 half-width flex flex-col">
                 <div class="w-3/4 mx-auto border-4 rounded-lg flex flex-col flex-1">
                     <img class="w-48 sm:w-64 m-auto" src="/images/{{ $product->images[0]['image'] }}" alt="productimg" />
                 </div>
-                <div class="flex flex-1 items-center justify-between w-3/4 mx-auto mt-12">
+                <div class="flex flex-1 items-center justify-around lg:justify-between w-3/4 mx-auto mt-12">
                     @foreach($product->images as $image)
-                        <img class="w-16 sm:w-24 border-4 rounded-lg p-1 cursor-pointer hover:border-orange" src="/images/{{ $image->image }}" alt="productimg" />
+                        <img class="product-images w-16 sm:w-24 border-4 rounded-lg p-1 cursor-pointer hover:border-orange active:border-orange" src="/images/{{ $image->image }}" alt="productimg" />
                     @endforeach
                 </div>
             </div>
-            <div class="p-2 flex flex-col justify-between font-semibold">
-                <h2 class="mt-10">{{ $product['name'] }}</h2>
-                <p class="px-10 mt-10 font-thin break-words overflow-y-auto">{{ $product['description'] }}</p>
+            <div class="py-2 px-10 flex flex-col justify-between font-semibold">
+                <h2 class="mt-10 lg:mt-0 uppercase">{{ $product['name'] }}</h2>
+                <h2 class="mt-10 text-left font-semibold text-gray-800">Description</h2>
+                <p class="mt-4 font-thin text-left text-gray-700">{{ str_limit($product['description'], 400, '....') }}</p>
+                @if(strlen(strip_tags($product['description'])) > 400)
+                <a href='#full-desc' class='py-2 text-left text-gray-800 font-semibold underline text-sm hover:text-gray-400'>READ MORE</a>
+                @endif
                 <h2 class="mt-10">${{ $product['price'] }}</h2>
                 @if($product->inStock())
                 <button class="add-to-cart-btn mt-10 text-white rounded-lg flex mx-auto w-1/2 h-10">
@@ -43,5 +36,11 @@
                 @endif
             </div>
         </div>
+        @if(strlen(strip_tags($product['description'])) > 400)
+        <div class="mt-32 px-10 lg:p-2 flex flex-col justify-center">
+            <h2 class="text-gray-800 font-semibold uppercase" id="full-desc">Product Details</h2>
+            <p class="mt-10 text-gray-700">{{ $product['description'] }}</p>
+        </div>
+        @endif
     </div>
 @endsection

@@ -23,7 +23,8 @@ class Order extends Model
         'status'
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\Model\User');
     }
 

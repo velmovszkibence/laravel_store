@@ -1,16 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-<nav class="tabs flex flex-col sm:flex-row px-10 py-2 mb-2">
-    <a href="{{ route('admin.dashboard') }}" class="text-sm tracking-widest text-white py-2 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 active">
-        <svg class="w-10 p-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
-        </svg>
-    </a>
-</nav>
-<div class="grid min-h-80 place-items-center mt-10 lg:mt-0">
+
+<div class="grid min-h-80 mt-10 lg:mt-0">
     <div class="mx-auto text-center text-xs sm:text-sm w-full lg:w-4/5 xl:w-full grid grid-cols-2">
-        <div>
+        <div class="my-auto">
             {!! Form::open(['method'=>'POST', 'action'=>'App\Http\Controllers\AdminController@storeCategory']) !!}
             <div class="container">
                 <div class="grid grid-cols sm:px-6">
@@ -41,8 +35,8 @@
             </div>
             {!! Form::close() !!}
         </div>
-        <div>
-            <div class="flex flex-col list-none mx-auto sm:w-2/3">
+        <div class="flex items-center">
+            <div class="flex flex-col list-none mx-auto sm:w-2/3 max-h-3/4 overflow-auto">
                 @foreach($parents as $parent)
 
                     <ul class="bg-teal-600">

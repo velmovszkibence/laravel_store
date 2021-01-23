@@ -1,6 +1,6 @@
 <div id="navbar" class="hidden w-full lg:block">
     <nav class="bg-orange text-white text-sm 2xl:text-xl">
-        <div class="container mx-auto flex flex-col px-4 pt-6 pb-0 lg:flex-row">
+        <div class="container mx-auto flex flex-col p-4 lg:flex-row">
             <ul class="flex flex-col mx-auto items-center font-semibold text-center w-1/2 text-sm lg:w-full lg:flex lg:flex-row xl:text-base">
                 <li class="hidden lg:block lg:mr-auto">
                     <a href="{{ route('product.index') }}" class="nav-item">
@@ -25,7 +25,7 @@
                                     @foreach($subcategories as $category)
                                         @if($parent->id == $category->parent_id)
                                         <li>
-                                            <a href="#" class="block p-3 lg:pl-24 hover:bg-white text-white hover:text-orange text-center lg:text-left">{{ $category->category_name }}</a>
+                                            <a href="{{ route('product.index', ['category' => $category->id]) }}" class="block p-3 lg:pl-24 hover:bg-white text-white hover:text-orange text-center lg:text-left">{{ $category->category_name }}</a>
                                         </li>
                                         @endif
                                     @endforeach

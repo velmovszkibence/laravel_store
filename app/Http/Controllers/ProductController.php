@@ -24,23 +24,26 @@ class ProductController extends Controller
         $parents = Category::whereNull('parent_id')->get();
         $subcategories = Category::whereNotNull('parent_id')->orderBy('category_name', 'asc')->get();
         $featured = ProductResource::collection(Product::inRandomOrder()->where('discount', '>', '0')->limit(6)->get());
-        if($parents && $subcategories && $featured) {
-            if($request->q) {
-                $input = $this->validate($request, [
-                    'q' => 'min:3|max:30|string'
-                ]);
+       
+        if($request->q) {
+            $input = $this->validate($request, [
+                'q' => 'min:3|max:30|string'
+            ]);
 
-                $products = ProductResource::collection(Product::where('products.name', 'like', '%'. $input['q'] . '%')
-                ->orWhere('products.description', 'like', '%'. $input['q'] . '%')
-                ->orderBy('products.name', 'desc')->paginate(20));
-            } else {
-                $products = ProductResource::collection(Product::where('is_active', 1)->orderBy('name', 'desc')->paginate(20));
-            }
-
-            return view('index', ['products' => $products, 'parents' => $parents, 'subcategories' => $subcategories, 'featured' => $featured]);
+            $products = ProductResource::collection(Product::where('products.name', 'like', '%'. $input['q'] . '%')
+            ->orWhere('products.description', 'like', '%'. $input['q'] . '%')
+            ->orderBy('products.name', 'desc')->paginate(20));
+        } else if($request->category) {
+            $input = $this->validate($request, [
+                'category' => 'required|numeric|min:1|max:100'
+            ]);
+            $products = Product::where('category_id', '=', $input['category'])->paginate(20);
+        } else {
+            $products = ProductResource::collection(Product::where('is_active', 1)->orderBy('name', 'desc')->paginate(10));
         }
 
-        return redirect()->route('product.index')->with('error-msg', 'Something went wrong');
+        return view('index', ['products' => $products, 'parents' => $parents, 'subcategories' => $subcategories, 'featured' => $featured]);
+        
     }
 
     public function show($id)
@@ -66,7 +69,8 @@ class ProductController extends Controller
         return redirect()->route('product.index')->with('success', '1 Item added to your cart');
     }
 
-    public function increaseNumberOfItems($id) {
+    public function increaseNumberOfItems($id)
+    {
         $prevCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($prevCart);
         $cart->increaseByOne($id);
@@ -75,7 +79,8 @@ class ProductController extends Controller
         return redirect()->route('product.shoppingcart');
     }
 
-    public function decreaseNumberOfItems($id) {
+    public function decreaseNumberOfItems($id)
+    {
         $prevCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($prevCart);
         $cart->decreaseByOne($id);
@@ -89,7 +94,8 @@ class ProductController extends Controller
         return redirect()->route('product.shoppingcart');
     }
 
-    public function deleteItemFromCart($id) {
+    public function deleteItemFromCart($id)
+    {
         $prevCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($prevCart);
         $cart->deleteFromCart($id);
@@ -187,4 +193,5 @@ class ProductController extends Controller
         Session::forget('cart');
         return redirect()->route('product.index')->with('success', 'Your order created successfully. Thank you for choosing us!');
     }
+
 }

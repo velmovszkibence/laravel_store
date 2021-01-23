@@ -32,7 +32,8 @@ class Cart
         $this->totalPrice += $item->price;
     }
 
-    public function decreaseByOne($id) {
+    public function decreaseByOne($id)
+    {
         $this->items[$id]['quantity']--;
         $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
         $this->totalQuantity--;
@@ -42,14 +43,16 @@ class Cart
         }
     }
 
-    public function increaseByOne($id) {
+    public function increaseByOne($id)
+    {
         $this->items[$id]['quantity']++;
         $this->items[$id]['price'] += $this->items[$id]['item']['price'];
         $this->totalQuantity++;
         $this->totalPrice += $this->items[$id]['item']['price'];
     }
 
-    public function deleteFromCart($id) {
+    public function deleteFromCart($id)
+    {
         $this->totalQuantity -= $this->items[$id]['quantity'];
         $this->totalPrice -= $this->items[$id]['price'];
         unset($this->items[$id]);

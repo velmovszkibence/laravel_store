@@ -22,11 +22,11 @@
                     @include('admin.includes.searchform', $link)
                 </div>
                 @if(session('not-found'))
-                <div class="flex">
+                <div class="flex text-center">
                     <h1 class="m-auto">{{ session('not-found') }}</h1>
                 </div>
                 @elseif ($errors->any())
-                <div class="p-4 mb-10 bg-red-400 w-1/2 border-2 border-red-500 text-white shadow-lg rounded-lg">
+                <div class="p-4 mb-10 bg-red-400 w-1/2 border-2 border-red-500 text-white text-center shadow-lg rounded-lg">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -34,8 +34,6 @@
                     </ul>
                 </div>
                 @else
-
-
                     @if($products)
                     @foreach($products as $product)
                     <a href="{{ route('admin.product.edit', $product->id) }}">

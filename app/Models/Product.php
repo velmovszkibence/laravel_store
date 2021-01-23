@@ -13,11 +13,13 @@ class Product extends Model
         'name', 'price', 'stock', 'description', 'is_active', 'discount', 'sold', 'category_id'
     ];
 
-    public function outOfStock() {
+    public function outOfStock()
+    {
         return $this->stock == 0;
     }
 
-    public function hasLowStock() {
+    public function hasLowStock()
+    {
 
         if($this->outOfStock()) {
             return false;
@@ -25,23 +27,28 @@ class Product extends Model
         return (bool) ($this->stock <= 10);
     }
 
-    public function hasStock($stock) {
+    public function hasStock($stock)
+    {
         return $this->stock >= $stock;
     }
 
-    public function inStock() {
+    public function inStock()
+    {
         return $this->stock >= 1;
     }
 
-    public function calculatePrice() {
+    public function calculatePrice()
+    {
         return $this->price - ($this->price * $this->discount / 100);
     }
 
-    public function category() {
+    public function category()
+    {
         return $this->hasOne('App\Models\Category', 'id', 'category_id');
     }
 
-    public function images() {
+    public function images()
+    {
         return $this->hasMany('App\Models\Image');
     }
 

@@ -14,11 +14,13 @@ class AdminController extends Controller
 
     public function index() {}
 
-    public function getAccountPage() {
+    public function getAccountPage()
+    {
         return view('admin.account.index');
     }
 
-    public function updateAdmin(Request $request) {
+    public function updateAdmin(Request $request)
+    {
         $email = User::where('email', $request->email)->exists();
         if($email == true && $request->newpassword == $request->confirmpassword) {
             User::where('email', $request->email)->update(['password' => bcrypt($request->newpassword)]);
@@ -27,7 +29,8 @@ class AdminController extends Controller
         return redirect()->back()->with('update-fail', 'Wrong email address or password!');
     }
 
-    public function getDashboard() {
+    public function getDashboard()
+    {
         $products = Product::where('sold', '>', 0)->orderBy('sold', 'desc')->limit(5)->get();
         if(count($products) < 5) {
             $products = Product::inRandomOrder()->limit(5)->get();
@@ -35,11 +38,13 @@ class AdminController extends Controller
         return view('admin.dashboard', ['products' => $products]);
     }
 
-    public function getHelpPage() {
+    public function getHelpPage()
+    {
         return view('admin.help.index');
     }
 
-    public function getOrderPage(Request $request) {
+    public function getOrderPage(Request $request)
+    {
         if($request->q) {
             $orders = Order::query()
             ->where('name', 'like', '%' . $request->q . '%')
@@ -53,19 +58,22 @@ class AdminController extends Controller
         return view('admin.order.index', ['orders' => $orders, 'count' => $count]);
     }
 
-    public function updateOrderStatus(Request $request) {
+    public function updateOrderStatus(Request $request)
+    {
         $order = Order::find($request->id);
         $order->update(['status' => $request->status]);
         return redirect()->back()->with('success_message', 'Order successfully updated');
     }
 
-    public function showOrder($id) {
+    public function showOrder($id)
+    {
         $order = Order::find($id);
         $cartItems = unserialize($order->cart);
         return view('admin.order.show', ['order' => $order, 'cartItems' => $cartItems]);
     }
 
-    public function getProductPage(Request $request) {
+    public function getProductPage(Request $request)
+    {
         if($request->q) {
             $input = $this->validate($request, [
                 'q' => 'required|min:3|max:30|string'
@@ -91,7 +99,8 @@ class AdminController extends Controller
         }
     }
 
-    public function storeProduct(Request $request) {
+    public function storeProduct(Request $request)
+    {
         $input = $this->validate($request, [
             'name' => 'required|min:5|string|unique:products,name',
             'price' => 'required|min:1|between:1,9999.99',
@@ -124,7 +133,8 @@ class AdminController extends Controller
         return redirect()->back()->with('success_message', 'Product successfully created!');
     }
 
-    public function getEditProductPage($id) {
+    public function getEditProductPage($id)
+    {
         $product = Product::find($id);
         $parents = Category::whereNull('parent_id')->get();
         $subcategories = Category::whereNotNull('parent_id')->orderBy('category_name', 'asc')->get();
@@ -135,7 +145,8 @@ class AdminController extends Controller
         }
     }
 
-    public function updateProduct(Request $request, $id) {
+    public function updateProduct(Request $request, $id)
+    {
         // strlen let 0 value pass
         $req = $request->except('product_image');
         $input = array_filter($req, 'strlen');
@@ -160,11 +171,18 @@ class AdminController extends Controller
             }
         }
 
+        $product = Product::find($id);
+        if($input['category']) {
+            $product->category_id = $input['category'];
+            $product->save();
+        }
         Product::find($id)->update($input);
+
         return redirect()->to('admin/product')->with('success_message', 'Product successfully updated!');
     }
 
-    public function activateProduct(Request $request) {
+    public function activateProduct(Request $request)
+    {
         $product = Product::find($request->id);
         $success = 'Product successfully activated!';
         if($request->is_active == 0) {
@@ -191,13 +209,15 @@ class AdminController extends Controller
 
     }
 
-    public function getCategoryPage() {
+    public function getCategoryPage()
+    {
         $parents = Category::whereNull('parent_id')->get();
         $subcategories = Category::whereNotNull('parent_id')->orderBy('category_name', 'asc')->get();
         return view('admin.category.index', ['parents' => $parents, 'subcategories' => $subcategories]);
     }
 
-    public function storeCategory(Request $request) {
+    public function storeCategory(Request $request)
+    {
         $category = new Category();
         $category->category_name = $request->category;
         if($request->parent) {
@@ -207,7 +227,8 @@ class AdminController extends Controller
         return redirect()->back()->with('success_message', 'Category successfully created!');
     }
 
-    public function deleteCategory($id) {
+    public function deleteCategory($id)
+    {
         $category = Category::find($id);
         if($category->parent_id == null) {
             $categories = Category::where('parent_id', '=', $category->id)->get();
@@ -219,11 +240,13 @@ class AdminController extends Controller
         return redirect()->back()->with('success_message', 'Category successfully deleted');
     }
 
-    public function getStatisticPage() {
+    public function getStatisticPage()
+    {
         return view('admin.statistic.index');
     }
 
-    public function getStockPage() {
+    public function getStockPage()
+    {
         return view('admin.stock.index');
     }
 

@@ -16,11 +16,13 @@ class Category extends Model
         'parent_id'
     ];
 
-    public function parent() {
+    public function parent()
+    {
         return $this->belongsTo('App\Models\Category', 'parent_id'); // get parent category
     }
 
-    public function subcategory() {
+    public function subcategory()
+    {
         return $this->hasMany('App\Models\Category', 'parent_id'); //get all subs. NOT RECURSIVE
     }
 
