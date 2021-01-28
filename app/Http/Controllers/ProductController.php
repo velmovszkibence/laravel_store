@@ -39,7 +39,7 @@ class ProductController extends Controller
             ]);
             $products = Product::where('category_id', '=', $input['category'])->paginate(20);
         } else {
-            $products = ProductResource::collection(Product::where('is_active', 1)->orderBy('name', 'desc')->paginate(10));
+            $products = ProductResource::collection(Product::where('is_active', 1)->orderBy('name', 'desc')->paginate(20));
         }
 
         return view('index', ['products' => $products, 'parents' => $parents, 'subcategories' => $subcategories, 'featured' => $featured]);
