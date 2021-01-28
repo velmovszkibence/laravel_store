@@ -107,7 +107,7 @@ class AdminController extends Controller
             'discount' => 'required|integer',
             'stock' => 'required|integer',
             'category' => 'integer',
-            'description' => 'required|string|min:10|max:500',
+            'description' => 'required|string|min:10|max:2000',
             'images' => 'required|array'
         ]);
 
