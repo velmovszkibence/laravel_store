@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="agreement text-center py-5 sm:pl-5">
-                <span class="text-sm text-gray-600">By logging in, you agree to <a href="#" class="text-gray-700 underline">Privacy Policy</a> and <a href="#" class="text-gray-700 underline">Terms of use</a></span>
+                <span class="text-sm text-gray-600">By logging in, you agree to our <a href="#" class="text-gray-700 underline">Privacy Policy</a> and <a href="#" class="text-gray-700 underline">Terms of use</a></span>
             </div>
             <div class="w-100 md:pl-8 md:pt-4">
                 <div class="w-full">

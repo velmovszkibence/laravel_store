@@ -7,7 +7,7 @@
 
             <h1 class="mb-6">Overview</h1>
 
-            <div class="grid grid-cols gap-8 sm:grid-cols-2 lg:grid-cols-4 w-full mb-16">
+            <div class="grid grid-cols gap-8 sm:grid-cols-2 lg:grid-cols-4 w-full mb-16 tracking-widest">
                 <div class="h-32 border-2 border-gray-300 shadow">
                     <div class="flex justify-between py-2 px-4 mb-2">
                         <svg class="w-8 text-orange" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

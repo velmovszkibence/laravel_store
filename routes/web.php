@@ -6,15 +6,21 @@ Route::get('/', 'App\Http\Controllers\ProductController@index')->name('product.i
 Route::get('/products/{id}', 'App\Http\Controllers\ProductController@show')->name('product.show');
 
 Route::get('/add-to-cart/{id}', 'App\Http\Controllers\ProductController@addToCart')->name('product.addtocart');
-
 Route::get('/shopping-cart', 'App\Http\Controllers\ProductController@getShoppingCart')->name('product.shoppingcart');
-
 Route::get('/increase/{id}', 'App\Http\Controllers\ProductController@increaseNumberOfItems')->name('product.increase');
 Route::get('/decrease/{id}', 'App\Http\Controllers\ProductController@decreaseNumberOfItems')->name('product.decrease');
 Route::get('/delete/{id}', 'App\Http\Controllers\ProductController@deleteItemFromCart')->name('product.delete');
 
-Route::get('/checkout', 'App\Http\Controllers\ProductController@getCheckout')->name('checkout')->middleware('auth');
+Route::get('/checkout-option', function(){
+    return view('shop.checkout-option');
+})->name('checkout.option');
+
+Route::get('/checkout', 'App\Http\Controllers\ProductController@getCheckout')->name('checkout');
 Route::post('/checkout', 'App\Http\Controllers\ProductController@postCheckout')->name('checkout');
+
+Route::get('payment', 'App\Http\Controllers\PayPalController@payment')->name('payment.handle');
+Route::get('cancel', 'App\Http\Controllers\PayPalController@cancel')->name('payment.cancel');
+Route::get('payment/success', 'App\Http\Controllers\PayPalController@success')->name('payment.success');
 
 Route::group(['prefix' => 'user'], function () {
     Route::group(['middleware' => 'guest'], function () {

@@ -28,6 +28,10 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="flex justify-evenly items-end mb-4 lg:w-1/2 lg:ml-auto lg:pr-20 lg:justify-around">
+                    <h2 class="text-lg tracking-widest font-semibold">Total Price: </h2>
+                    <span class="text-red-500 font-bold text-2xl">${{ $totalPrice }}</span>
+                </div>
                 <div class="flex flex-col-reverse items-center border-t-2 sm:flex-row sm:justify-evenly">
                     <div class="py-10 w-4/5 sm:w-1/3 sm:px-4 md:w-1/2 lg:w-1/4">
                         <a href="{{ url()->previous() }}" class="flex justify-evenly text-center text-white text-sm bg-gray-500 rounded-lg py-2 md:p-2 md:text-lg">
@@ -38,7 +42,7 @@
                         </a>
                     </div>
                     <div class="py-10 w-4/5 sm:w-1/3 sm:px-4 md:w-1/2 lg:w-1/4">
-                        <a href="{{ route('checkout') }}" class="flex justify-evenly text-center text-white text-sm bg-green-500 rounded-lg p-2 md:text-lg">
+                        <a href="{{ route('checkout.option') }}" class="flex justify-evenly text-center text-white text-sm bg-green-500 rounded-lg p-2 md:text-lg">
                             <svg class="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>

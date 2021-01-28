@@ -24,7 +24,7 @@ class ProductController extends Controller
         $parents = Category::whereNull('parent_id')->get();
         $subcategories = Category::whereNotNull('parent_id')->orderBy('category_name', 'asc')->get();
         $featured = ProductResource::collection(Product::inRandomOrder()->where('discount', '>', '0')->limit(6)->get());
-       
+
         if($request->q) {
             $input = $this->validate($request, [
                 'q' => 'min:3|max:30|string'
@@ -43,7 +43,7 @@ class ProductController extends Controller
         }
 
         return view('index', ['products' => $products, 'parents' => $parents, 'subcategories' => $subcategories, 'featured' => $featured]);
-        
+
     }
 
     public function show($id)
@@ -133,10 +133,10 @@ class ProductController extends Controller
 
         if(Auth::id()) {
             $user = User::find(Auth::id());
-            return view('shop.checkout', ['total' => $total, 'user' => $user]);
+            return view('shop.checkout-option', ['total' => $total, 'user' => $user]);
         }
 
-        return view('shop.checkout', ['total' => $total]);
+        return view('shop.checkout-option', ['total' => $total]);
 
     }
 

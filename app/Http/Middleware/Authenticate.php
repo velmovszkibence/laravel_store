@@ -17,13 +17,13 @@ class Authenticate extends Middleware
     {
         Session::put('previousUrl', $request->url());
 
-        if (! $request->expectsJson()) {
-            if($request->path() == 'checkout') {
-                return route('user.signin');
-            } else {
-                abort(404);
-            }
-        }
+        // if (! $request->expectsJson()) {
+        //     if($request->path() == 'checkout') {
+        //         return route('user.signin');
+        //     } else {
+        //         abort(404);
+        //     }
+        // }
         return route('user.signin');
     }
 }

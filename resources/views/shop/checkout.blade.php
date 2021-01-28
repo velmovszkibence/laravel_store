@@ -31,7 +31,7 @@
 @section('content')
 <div class="container mx-auto p-10">
     <div class="w-3/4 lg:w-2/4 mx-auto">
-        <h1 class="text-xl text-center mb-4 border-b-2">Checkout</h1>
+        <h1 class="text-xl text-center mb-4 border-b-2 pb-2 lg:pb-8">Checkout</h1>
         <h4 class="mb-4">Your Total Payment: ${{ $total }}</h4>
 
         <form action="{{ route('checkout') }}" method="post" id="payment-form">
@@ -41,13 +41,13 @@
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
                         <i class="text-red-500">* </i>Full Name
                     </label>
-                    <input value="{{ $user ? $user->name : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="name" name="name" type="text" placeholder="Full name" required>
+                    <input value="{{ !empty($user->name) ? $user->name : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="name" name="name" type="text" placeholder="Full name" required>
                 </div>
                 <div class="w-full px-3 mb-8">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="email">
                         <i class="text-red-500">* </i>Email
                     </label>
-                    <input value="{{ $user ? $user->email : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" name="email" type="email" placeholder="johndoe@gmail.com" required>
+                    <input value="{{ !empty($user->email) ? $user->email : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" name="email" type="email" placeholder="johndoe@gmail.com" required>
                 </div>
             </div>
 
@@ -56,13 +56,13 @@
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="phone">
                         <i class="text-red-500">* </i>Phone
                     </label>
-                    <input value="{{ $user ? $user->phone : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" name="phone" type="number" placeholder="1234567891" required>
+                    <input value="{{ !empty($user->phone) ? $user->phone : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" name="phone" type="number" placeholder="1234567891" required>
                 </div>
                 <div class="w-full px-3 mb-8">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="address">
                         <i class="text-red-500">* </i>Address
                     </label>
-                    <input value="{{ $user ? $user->address : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="address" name="address" type="text" placeholder="Street, house number" required>
+                    <input value="{{ !empty($user->address) ? $user->address : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="address" name="address" type="text" placeholder="Street, house number" required>
                 </div>
             </div>
 
@@ -71,19 +71,19 @@
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="city">
                         <i class="text-red-500">* </i>City
                     </label>
-                    <input value="{{ $user ? $user->city : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="city" name="city" type="text" placeholder="Chicago" required>
+                    <input value="{{ !empty($user->city) ? $user->city : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="city" name="city" type="text" placeholder="Chicago" required>
                 </div>
                 <div class="w-full lg:w-2/3 px-3 mb-8">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="country">
                         <i class="text-red-500">* </i>Country
                     </label>
-                    <input value="{{ $user ? $user->country : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="country" name="country" type="text" placeholder="United States" required>
+                    <input value="{{ !empty($user->country) ? $user->country : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="country" name="country" type="text" placeholder="United States" required>
                 </div>
                 <div class="w-full lg:w-1/3 px-3 mb-8">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="zipcode">
                         <i class="text-red-500">* </i>Zip code
                     </label>
-                    <input value="{{ $user ? $user->zip : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="zipcode" name="zipcode" type="number" placeholder="12345" required>
+                    <input value="{{ !empty($user->zip) ? $user->zip : null }}" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="zipcode" name="zipcode" type="number" placeholder="12345" required>
                 </div>
             </div>
 
@@ -99,10 +99,11 @@
               <div id="card-errors" role="alert"></div>
             </div>
             <div class="flex">
-                <button class="mx-auto shadow-md bg-teal-600 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Place Order</button>
+                <div id="paypal-button"></div>
+                <button id="place-order" class="mx-auto shadow-md bg-teal-600 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Place Order</button>
             </div>
             {{ csrf_field() }}
-          </form>
+        </form>
 
 
     </div>

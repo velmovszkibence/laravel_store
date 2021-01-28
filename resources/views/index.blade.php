@@ -34,7 +34,7 @@
                         <span class="off absolute transform rotate-45 text-white text-md text-semibold">{{ $product->discount }}%<i class="text-xs"> OFF</i></span>
                         <a href="{{ route('product.show', $product['id']) }}">
                             <img src="/images/{{ !empty($product->images[0]->image) ? $product->images[0]->image : '' }}" alt="productimg" class="h-56 mx-auto product-img" />
-                            <h2 class="mt-4 text-sm">{{ $product['name'] }}</h2>
+                            <h2 class="mt-4 text-sm tracking-wider">{{ $product['name'] }}</h2>
                             <div class="flex flex-row">
                                 <h2 class="pt-2 w-1/3 line-through text-sm text-right">${{ $product['price'] }}</h2>
                                 <h2 class="pt-2 w-1/3 text-center text-xl font-semibold text-red-600">${{ $product->calculatePrice() }}</h2>
@@ -70,7 +70,7 @@
             New Products
         </h2>
         @endif
-        @if(count($products) != 0) 
+        @if(count($products) != 0)
         <div class="flex flex-wrap text-center gap-8 justify-center">
             @foreach($products as $product)
 
@@ -79,7 +79,7 @@
                             <span class="off absolute transform rotate-45 text-white text-md text-semibold">{{ $product->discount }}%<i class="text-xs"> OFF</i></span>
                             <a href="{{ route('product.show', $product['id']) }}">
                                 <img src="/images/{{ !empty($product->images[0]->image) ? $product->images[0]->image : '' }}" alt="productimg" class="h-56 mx-auto product-img" />
-                                <h2 class="mt-4 text-sm">{{ $product['name'] }}</h2>
+                                <h2 class="mt-4 text-sm tracking-wider">{{ $product['name'] }}</h2>
                                 <div class="flex flex-row">
                                     <h2 class="pt-2 w-1/3 line-through text-sm text-right">${{ $product['price'] }}</h2>
                                     <h2 class="pt-2 w-1/3 text-center text-xl font-semibold text-red-600">${{ $product->calculatePrice() }}</h2>
@@ -107,7 +107,7 @@
                     <div class="product relative my-10 h-64 mx-auto">
                         <a href="{{ route('product.show', $product['id']) }}">
                             <img src="/images/{{ !empty($product->images[0]->image) ? $product->images[0]->image : '' }}" alt="productimg" class="h-56 mx-auto product-img" />
-                            <h2 class="mt-4 text-sm">{{ $product['name'] }}</h2>
+                            <h2 class="mt-4 text-sm tracking-wider">{{ $product['name'] }}</h2>
                             <h2 class="pt-2 text-lg">${{ $product['price'] }}</h2>
                         </a>
 
@@ -131,7 +131,7 @@
             @endforeach
         </div>
         @else
-            <div class="flex">
+            <div class="flex flash-msg">
                 <div class="p-4 m-auto mb-10 bg-red-400 w-1/2 border-2 border-red-500 text-white text-center shadow-lg rounded-lg">
                     Sorry, no products found
                 </div>

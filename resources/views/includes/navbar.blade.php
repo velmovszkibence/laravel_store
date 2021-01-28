@@ -3,12 +3,12 @@
         <div class="container mx-auto flex flex-col p-4 lg:flex-row">
             <ul class="flex flex-col mx-auto items-center font-semibold text-center w-1/2 text-sm lg:w-full lg:flex lg:flex-row xl:text-base">
                 <li class="hidden lg:block lg:mr-auto">
-                    <a href="{{ route('product.index') }}" class="nav-item">
+                    <a href="{{ route('product.index') }}" class="nav-item px-6 py-2">
                         Shop
                     </a>
                 </li>
                 <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:mx-auto">
-                    <a href="#new" class="nav-item lg:px-3">New Products</a>
+                    <a href="#new" class="nav-item px-6 py-2">New Products</a>
                 </li>
                 @if(Request::is('/'))
                 <li class="toggleable hoverable w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:mx-auto">
@@ -38,7 +38,7 @@
                 </li>
                 @endif
                 <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:mx-auto">
-                    <a href="#" class="nav-item lg:px-3">Contact</a>
+                    <a href="#" class="nav-item px-6 py-2">Contact</a>
                 </li>
                 <li class="search-form mt-10 pr-8 mx-auto sm:pr-0 lg:col-span-3 lg:mt-0">
                     <?php $link = ['route' => 'product.index'] ?>
@@ -63,16 +63,18 @@
             <ul class="flex flex-col mx-auto items-center font-semibold text-center w-1/2 text-sm lg:w-full lg:flex lg:flex-row lg:justify-end xl:text-base">
                 @if(Auth::check() && Auth::user()->is_admin)
                 <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:ml-10">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-item lg:px-3">Dashboard</a>
+                    <a href="{{ route('admin.dashboard') }}" class="nav-item px-6 py-1">
+                        Dashboard
+                    </a>
                 </li>
                 @endif
                 <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:ml-10">
-                    <a href="{{ route('user.profile') }}" class="nav-item lg:px-3">
+                    <a href="{{ route('user.profile') }}" class="nav-item px-6 py-1">
                         Profile
                     </a>
                 </li>
                 <li class="w-full py-2 bg-white text-orange shadow-md lg:w-auto lg:shadow-none lg:bg-transparent lg:text-white mt-3 lg:mt-0 lg:ml-10">
-                    <a href="{{ route('user.logout') }}" class="nav-item lg:px-3">
+                    <a href="{{ route('user.logout') }}" class="nav-item px-6 py-1">
                         Logout
                     </a>
                 </li>

@@ -7,7 +7,6 @@ use App\Mail\AccountCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Auth;
-use Session;
 
 class UserController extends Controller
 {
@@ -33,9 +32,8 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        if(Session::has('previousUrl')) {
-            $prevUrl = Session::get('previousUrl');
-            Session::forget('previousUrl');
+        if(!empty($request->session()->previousUrl())) {
+            $prevUrl = $request->session()->previousUrl();
             return redirect()->to($prevUrl);
         }
 
@@ -61,9 +59,11 @@ class UserController extends Controller
                 if(auth()->user()->is_admin){
                     return redirect()->route('admin.dashboard');
                 } else {
-                    if(Session::has('previousUrl')) {
-                        $prevUrl = Session::get('previousUrl');
-                        Session::forget('previousUrl');
+                    if(!empty($request->session()->previousUrl())) {
+                        $prevUrl = $request->session()->previousUrl();
+                        if(str_contains($prevUrl, 'checkout-option')) {
+                            return redirect()->route('checkout');
+                        }
                         return redirect()->to($prevUrl);
                     }
                     return redirect()->route('user.profile');
