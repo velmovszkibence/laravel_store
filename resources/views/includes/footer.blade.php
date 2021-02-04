@@ -35,7 +35,7 @@
             <li class="py-2"><a href="#">Return Policy</a></li>
             <li class="py-2"><a href="#">Payment</a></li>
             <li class="py-2"><a href="#">Size Guide</a></li>
-        <div>
+        </div>
     </ul>
     <ul class="flex flex-col md:flex-row justify-evenly px-4 py-6">
         <div class="flex flex-col justify-between">
@@ -45,7 +45,7 @@
             <li class="py-2"><a href="#">Cookies</a></li>
             <li class="py-2"><a href="#">Contact Us</a></li>
             <li class="py-2"><a href="#">Right to cancel</a></li>
-        <div>
+        </div>
     </ul>
     <ul class="flex flex-col md:flex-row justify-evenly px-4 py-6">
         <div class="flex flex-col justify-between">
@@ -55,7 +55,7 @@
             <li class="py-2"><a href="#">Shop Location</a></li>
             <li class="py-2"><a href="#">Join Us</a></li>
             <li class="py-2"><a href="#">Our Commitments</a></li>
-        <div>
+        </div>
     </ul>
     </nav>
     <div class="copy bg-orange text-white text-xs text-center py-6">

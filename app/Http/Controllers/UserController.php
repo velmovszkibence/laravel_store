@@ -53,16 +53,15 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt([
-            'email' => $request->input('email'),
-            'password' => $request->input('password')])) {
+        if (Auth::attempt(['email' => $request->input('email'),'password' => $request->input('password')]))
+            {
                 if(auth()->user()->is_admin){
                     return redirect()->route('admin.dashboard');
                 } else {
                     if(!empty($request->session()->previousUrl())) {
                         $prevUrl = $request->session()->previousUrl();
                         if(str_contains($prevUrl, 'checkout-option')) {
-                            return redirect()->route('checkout');
+                            return redirect()->to('/checkout');
                         }
                         return redirect()->to($prevUrl);
                     }

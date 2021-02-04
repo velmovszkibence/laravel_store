@@ -24,10 +24,10 @@
                 <h2 class="mt-10">${{ $product['price'] }}</h2>
                 @if($product->inStock())
                 <button class="add-to-cart-btn mt-10 text-white rounded-lg flex mx-auto w-1/2 h-10">
-                    <svg class="w-1/6 md:w-2/6 lg:w-1/6 p-2 bg-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="h-full w-1/6 md:w-2/6 lg:w-1/6 p-2 bg-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
-                    <a href="{{ route('product.addtocart', ['id' => $product['id']]) }}" class="mx-auto flex items-center"><span class="block font-bold text-xs">ADD TO CART</span></a>
+                    <a href="{{ route('product.addtocart', ['id' => $product['id']]) }}" class="mx-auto flex items-center h-full"><span class="block font-bold text-xs">ADD TO CART</span></a>
                 </button>
                 @else
                 <button class="mt-10 text-white text-center rounded-lg flex mx-auto w-1/2 h-10 cursor-default items-center">

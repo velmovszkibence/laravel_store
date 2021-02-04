@@ -133,10 +133,10 @@ class ProductController extends Controller
 
         if(Auth::id()) {
             $user = User::find(Auth::id());
-            return view('shop.checkout-option', ['total' => $total, 'user' => $user]);
+            return view('shop.checkout', ['total' => $total, 'user' => $user]);
         }
 
-        return view('shop.checkout-option', ['total' => $total]);
+        return view('shop.checkout', ['total' => $total]);
 
     }
 

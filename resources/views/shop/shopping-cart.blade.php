@@ -34,7 +34,7 @@
                 </div>
                 <div class="flex flex-col-reverse items-center border-t-2 sm:flex-row sm:justify-evenly">
                     <div class="py-10 w-4/5 sm:w-1/3 sm:px-4 md:w-1/2 lg:w-1/4">
-                        <a href="{{ url()->previous() }}" class="flex justify-evenly text-center text-white text-sm bg-gray-500 rounded-lg py-2 md:p-2 md:text-lg">
+                        <a href="{{ route('product.index') }}" class="flex justify-evenly text-center text-white text-sm bg-gray-500 rounded-lg py-2 md:p-2 md:text-lg">
                             <svg class="w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                             </svg>
