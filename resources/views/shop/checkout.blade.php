@@ -33,6 +33,15 @@
     <div class="w-3/4 lg:w-2/4 mx-auto">
         <h1 class="text-xl text-center mb-4 border-b-2 pb-2 lg:pb-8">Checkout</h1>
         <h4 class="mb-4">Your Total Payment: ${{ $total }}</h4>
+        @if ($errors->any())
+            <div class="flex pb-10">
+                <ul class="m-auto bg-red-500 text-white italic">
+                    @foreach ($errors->all() as $error)
+                        <li class="py-1 px-4">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <form action="{{ route('checkout') }}" method="post" id="payment-form">
 

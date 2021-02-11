@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'email' => 'email|required|unique:users,email',
-            'password' => 'required|min:5'
+            'password' => 'required|min:5|max:20'
         ]);
 
         $user = new User([
@@ -55,7 +55,7 @@ class UserController extends Controller
 
         if (Auth::attempt(['email' => $request->input('email'),'password' => $request->input('password')]))
             {
-                if(auth()->user()->is_admin){
+                if(auth()->user()->is_admin && !str_contains($request->session()->previousUrl(), 'checkout-option')){
                     return redirect()->route('admin.dashboard');
                 } else {
                     if(!empty($request->session()->previousUrl())) {

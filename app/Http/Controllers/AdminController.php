@@ -111,13 +111,15 @@ class AdminController extends Controller
             'images' => 'required|array'
         ]);
 
-        $product = new Product;
-        $product->name = $input['name'];
-        $product->price = $input['price'];
-        $product->stock = $input['stock'];
-        $product->category_id = $input['category'];
-        $product->description = $input['description'];
-        $product->discount = $input['discount'];
+        $product = Product::create([
+            'name' => $input['name'],
+            'price' => $input['price'],
+            'stock' => $input['stock'],
+            'category_id' => $input['category'],
+            'description' => $input['description'],
+            'discount' => $input['discount']
+        ]);
+
         $product->save();
 
         if($request->images) {
@@ -218,10 +220,15 @@ class AdminController extends Controller
 
     public function storeCategory(Request $request)
     {
+
+        $input = $this->validate($request, [
+            'category' => 'required|min:3|max:20|string',
+            'parent' => 'integer'
+        ]);
         $category = new Category();
-        $category->category_name = $request->category;
+        $category->category_name = $input['category'];
         if($request->parent) {
-            $category->parent_id = $request->parent;
+            $category->parent_id = $input['parent'];
         }
         $category->save();
         return redirect()->back()->with('success_message', 'Category successfully created!');

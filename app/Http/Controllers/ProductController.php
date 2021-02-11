@@ -151,6 +151,16 @@ class ProductController extends Controller
         // Charge with stripe and save order to db
         Stripe::setApiKey('sk_test_51HHWrwKg112ZJOxi1vzTpYho8tHcffJotwlTGz0RYxu55fpD6bxPCdwq7uTJs0cOlqp913sl7Nq47UpM66M5SWAM00nTsiIIF3');
 
+        $input = $this->validate($request, [
+            'name' => 'required|min:5|max:30|string',
+            'address' => 'required|min:5|max:30|string',
+            'city' => 'required|min:3|max:30|string',
+            'zipcode' => 'required|numeric|digits_between:1,5',
+            'country' => 'required|min:2|max:30|string',
+            'email' => 'required|email',
+            'phone' => 'required|numeric|digits_between:9,30'
+        ]);
+
         try {
             $charge = Charge::create([
                 'amount' => $cart->totalPrice * 100,
@@ -159,25 +169,26 @@ class ProductController extends Controller
                 'source' => $request['stripeToken'],
             ]);
 
-            $order = new Order();
-            $order->user_id = Auth::id();
-            $order->user_id = rand(0, 20);
-            $order->name = $request->name;
-            $order->address = $request->address;
-            $order->city = $request->city;
-            $order->zipcode = $request->zipcode;
-            $order->country = $request->country;
-            $order->email = $request->email;
-            $order->phone = $request->phone;
-            $order->cart = serialize($cart);
-            $order->payment_id = $charge->id;
-            Auth::user()->orders()->save($order);
+            $order = Order::create([
+                'user_id' => Auth::id() || null,
+                'name' => $input['name'],
+                'address' => $input['address'],
+                'city' => $input['city'],
+                'zipcode' => $input['zipcode'],
+                'country' => $input['country'],
+                'email' => $input['email'],
+                'phone' => $input['phone'],
+                'cart' => serialize($cart),
+                'payment_id' => $charge->id
+            ]);
+
+            !Auth::user() ? $order->save() : Auth::user()->orders()->save($order);
 
         } catch(Exception $e) {
             return redirect()->route('checkout')->with('error', $e->getMessage());
         }
 
-        Mail::to($request->email)->send(new OrderUnderProcess($request->name, $cart));
+        Mail::to($input['email'])->send(new OrderUnderProcess($input['name'], $cart));
 
         // Count how many times product sold
         while(count($cart->items) != 0) {
