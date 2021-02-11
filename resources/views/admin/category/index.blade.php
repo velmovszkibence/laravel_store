@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="grid min-h-80 mt-10 lg:mt-0">
-    <div class="grid grid-cols mx-auto text-center text-xs w-full sm:text-sm lg:w-4/5 lg:h-screen lg:overflow-hidden lg:grid-cols-2 xl:w-full">
-        <div class="my-auto">
+    <div class="grid grid-cols mx-auto text-center text-xs w-full sm:text-sm lg:w-4/5 lg:h-screen lg:overflow-hidden lg:flex lg:flex-row xl:w-full">
+        <div class="my-auto lg:flex-1">
             {!! Form::open(['method'=>'POST', 'action'=>'App\Http\Controllers\AdminController@storeCategory']) !!}
 
                 <div class="grid grid-cols sm:px-6">
@@ -35,7 +35,7 @@
 
             {!! Form::close() !!}
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center lg:flex-1">
             <div class="flex flex-col list-none mx-auto w-2/3 max-h-3/4 overflow-auto lg:w-4/5">
                 @foreach($parents as $parent)
 

@@ -23,8 +23,8 @@
                     </svg>Product
                 </a>
             </li>
-            <li class="my-auto {{ Request::is('admin/categories') ? 'sm:pl-8 sm:pr-0' : '' }}">
-                <a href="{{ route('admin.category.index') }}" class="{{ Request::is('admin/categories') ? 'bg-white text-blue-600 sm:pl-32 lg:pl-2' : 'sm:pl-40 lg:pl-10' }} py-2 flex items-center rounded-lg lg:rounded-l-full">
+            <li class="my-auto {{ Request::is('admin/category') ? 'sm:pl-8 sm:pr-0' : '' }}">
+                <a href="{{ route('admin.category.index') }}" class="{{ Request::is('admin/category') ? 'bg-white text-blue-600 sm:pl-32 lg:pl-2' : 'sm:pl-40 lg:pl-10' }} py-2 flex items-center rounded-lg lg:rounded-l-full">
                     <svg class="w-8 p-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
                       </svg>Category
