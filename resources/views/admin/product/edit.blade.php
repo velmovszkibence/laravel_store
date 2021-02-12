@@ -53,7 +53,7 @@
                                     @if($subcategories)
                                         @foreach($subcategories as $category)
                                             @if($parent->id == $category->parent_id)
-                                                <option value="{{ $category->id }}">--{{ $category->category_name }}</option>
+                                                <option class="text-black" value="{{ $category->id }}">--{{ $category->category_name }}</option>
                                             @endif
                                         @endforeach
                                     @endif

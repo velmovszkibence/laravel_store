@@ -6,11 +6,19 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 text-center">
             <div class="p-2 half-width flex flex-col">
                 <div class="w-3/4 mx-auto border-4 rounded-lg flex flex-col flex-1">
-                    <img class="w-48 sm:w-64 m-auto" src="/images/{{ $product->images[0]['image'] }}" alt="productimg" />
+                    @if(!empty($product->images[0]->image))
+                        <img class="w-48 sm:w-64 m-auto" src="/images/{{ $product->images[0]->image }}" alt="productimg" />
+                    @else
+                        <img class="w-48 sm:w-64 m-auto" src="https://via.placeholder.com/400" />
+                    @endif
                 </div>
                 <div class="flex flex-1 items-center justify-around lg:justify-between w-3/4 mx-auto mt-12">
                     @foreach($product->images as $image)
+                    @if(!empty($image->image))
                         <img class="product-images w-16 sm:w-24 border-4 rounded-lg p-1 cursor-pointer hover:border-orange active:border-orange" src="/images/{{ $image->image }}" alt="productimg" />
+                    @else
+                        <img class="product-images w-16 sm:w-24 border-4 rounded-lg p-1 cursor-pointer hover:border-orange active:border-orange" src="https://via.placeholder.com/400" alt="productimg" />
+                    @endif
                     @endforeach
                 </div>
             </div>

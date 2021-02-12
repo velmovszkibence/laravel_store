@@ -108,7 +108,7 @@ class AdminController extends Controller
             'stock' => 'required|integer',
             'category' => 'integer',
             'description' => 'required|string|min:10|max:2000',
-            'images' => 'required|array'
+            'images' => 'array|nullable'
         ]);
 
         $product = Product::create([

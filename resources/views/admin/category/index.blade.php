@@ -18,7 +18,7 @@
                             <label class="block text-white text-sm font-semibold" for="parent">
                                 Select Parent Category
                             </label>
-                            <select name="parent" id="parent" class="appearance-none border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-white bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none">
+                            <select name="parent" id="parent" class="appearance-none border-2 border-gray-800 rounded-lg text-center block w-full p-3 mt-2 placeholder-white text-black bg-transparent focus:shadow-xl focus:shadow-outer focus:border-white focus:outline-none">
                                 <option value="{{ 0 }}">-------</option>
                                 @if($parents)
                                     @foreach($parents as $parent)
