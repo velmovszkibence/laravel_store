@@ -21263,7 +21263,7 @@ textarea {
   width: 0;
   height: 0;
   border-style: solid;
-  border-radius: 0px 10px 0px 0px;
+  /* border-radius: 0px 10px 0px 0px; */
   border-width: 0 100px 80px 0;
   border-color: transparent #f12922 transparent transparent;
   right: 0;
